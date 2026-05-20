@@ -1,0 +1,2621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vadora Tang — Portfolio</title>
+
+  <!--
+    QUICK EDIT GUIDE
+    1. Put your images in a folder called "img" beside this index.html file.
+       Example:
+       portfolio/
+       ├── index.html
+       └── img/
+           ├── hero.jpg
+           ├── kates-catering-cart.jpg
+           └── our-lion-city-vr.jpg
+
+    2. Scroll to the bottom of this file and find:
+       "EDIT PROJECT CARDS HERE"
+
+    3. To hide a card:
+       Change visible: true to visible: false
+
+    4. To control whether the View Project button appears:
+       status: "ready" shows the button
+       status: "not-ready" hides the button
+
+    5. To add a picture:
+       Change image: "" to image: "img/your-file-name.jpg"
+
+    6. To add a project link:
+       Change link: "#" to your URL, PDF, Behance page, GitHub page, or case-study page.
+
+    7. To adjust the first page spacing:
+       Search "#home" in the CSS and edit padding-top / padding-bottom / min-height.
+
+    8. To move the fixed dock:
+       Search "nav.dock-nav" in the CSS and edit bottom: 42px;
+
+    9. To make the dock stop following the scroll:
+       Change position: fixed; to position: sticky;
+  -->
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+    :root {
+      --cream: #F6F5EE;
+      --ice: #DCEEEE;
+      --aqua: #B9DFE1;
+      --teal: #5EA8AC;
+      --dark: #111111;
+      --cyan: #00A6C8;
+      --red: #E8503A;
+      --orange: #F5A623;
+      --radius: 14px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.10);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
+      --mono: "Space Grotesk", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --serif: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: var(--body);
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    section {
+      padding: 74px 0;
+    }
+
+    .section-wrap {
+      width: min(1080px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .mono {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+    }
+
+    .tag {
+      display: inline-block;
+      width: fit-content;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: var(--ice);
+      border: 1px solid var(--aqua);
+      border-radius: 999px;
+      padding: 3px 8px;
+    }
+
+    .sticker {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border-radius: 4px;
+      transform: rotate(-2deg);
+      margin-bottom: 14px;
+    }
+
+    .sticker.orange {
+      background: var(--orange);
+      color: var(--dark);
+    }
+
+    .sticker.teal {
+      background: var(--teal);
+      color: white;
+    }
+
+    /* MAC-STYLE DOCK NAVIGATION
+       This dock is fixed, so it follows the user while scrolling through
+       Projects, About, Resume, and Contact. */
+    body {
+      /* Prevent the fixed dock from covering the bottom content */
+      padding-bottom: 132px;
+    }
+
+    nav.dock-nav {
+      position: fixed;
+      left: 50%;
+      /* Move the dock up/down here */
+      bottom: 22px;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: max-content;
+      display: flex;
+      align-items: end;
+      gap: 10px;
+      padding: 10px 14px 12px;
+      background: rgba(255,255,255,0.58);
+      backdrop-filter: blur(22px) saturate(1.25);
+      -webkit-backdrop-filter: blur(22px) saturate(1.25);
+      border: 1px solid rgba(255,255,255,0.82);
+      border-radius: 28px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .nav-link {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      gap: 5px;
+      min-width: 58px;
+      color: var(--dark);
+      transition: transform 0.18s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      transform: translateY(-7px) scale(1.05);
+    }
+
+    .dock-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      border: 1px solid rgba(255,255,255,0.68);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.45);
+    }
+
+    .nav-link:nth-child(1) .dock-icon { background: linear-gradient(135deg, #DCEEEE, #8ED4DA); }
+    .nav-link:nth-child(2) .dock-icon { background: linear-gradient(135deg, #FFE6C7, #F5A623); }
+    .nav-link:nth-child(3) .dock-icon { background: linear-gradient(135deg, #E7D8FF, #BFA6F2); }
+    .nav-link:nth-child(4) .dock-icon { background: linear-gradient(135deg, #CDEFE7, #5EA8AC); }
+    .nav-link:nth-child(5) .dock-icon { background: linear-gradient(135deg, #FBE3E0, #E8503A); }
+
+    .dock-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.03em;
+      color: rgba(17,17,17,0.72);
+      line-height: 1;
+    }
+
+    .nav-link.active::after {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--dark);
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* HERO */
+    #home {
+      /* First page spacing.
+         108vh keeps the projects section from showing on first load. */
+          padding-top: 24px;
+          padding-bottom: 110px;
+          min-height: 108vh;
+          display: flex;
+          align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(38px, 7vw, 74px);
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .hero-name span {
+      display: block;
+      color: var(--cyan);
+      font-style: normal;
+      font-weight: 800;
+    }
+
+    .hero-kicker {
+      margin: 12px 0 22px;
+      color: #666;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      max-width: 440px;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .hero-copy strong {
+      color: var(--cyan);
+      font-weight: 800;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 1.5px solid var(--dark);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      transition: all 0.18s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn.primary {
+      background: var(--cyan);
+      color: white;
+      border-color: var(--cyan);
+    }
+
+    .hero-window {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transform: rotate(1deg);
+    }
+
+    .window-bar {
+      height: 42px;
+      background: linear-gradient(180deg, #f6f6f6 0%, #e5e5e5 100%);
+      border-bottom: 1px solid #d0d0d0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 16px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .red { background: #FF5F57; }
+    .yellow { background: #FFBD2E; }
+    .green { background: #28CA41; }
+
+    .window-title {
+      margin-left: 6px;
+      color: #555;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-image-placeholder {
+      min-height: 360px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(0,166,200,0.18), transparent 30%),
+        radial-gradient(circle at 70% 65%, rgba(232,80,58,0.18), transparent 30%),
+        linear-gradient(135deg, var(--ice), var(--aqua));
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 28px;
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-image-placeholder.has-image {
+      color: transparent;
+    }
+
+    /* PROJECTS */
+    #projects {
+      background: var(--ice);
+    }
+
+    .section-heading {
+      font-family: var(--serif);
+      font-size: clamp(30px, 4.5vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      color: #666;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      margin-bottom: 32px;
+    }
+
+    .finder-window {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .finder-body {
+      padding: 30px;
+    }
+
+    .project-category {
+      margin-bottom: 44px;
+    }
+
+    .project-category:last-child {
+      margin-bottom: 0;
+    }
+
+    .category-title-row {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      border-bottom: 1px solid #e5e5e5;
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+    }
+
+    .category-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .category-note {
+      color: #888;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      text-align: right;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      background: var(--cream);
+      border: 1px solid #e2e2da;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.18s, transform 0.18s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-img {
+      min-height: 120px;
+      padding: 16px;
+      display: flex;
+      align-items: flex-end;
+      border-bottom: 1px solid #e2e2da;
+      background: var(--fallback-bg, linear-gradient(135deg, var(--ice), var(--aqua)));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-img.has-image {
+      min-height: 145px;
+    }
+
+    .card-img img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-img.has-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.42));
+      pointer-events: none;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    .card-title {
+      margin: 9px 0 6px;
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.15;
+    }
+
+    .card-desc {
+      color: #444;
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
+    .card-meta {
+      color: #777;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+
+    .open-file-btn {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+      border-radius: 5px;
+      padding: 5px 10px;
+      transition: all 0.16s;
+    }
+
+    .open-file-btn:hover {
+      background: var(--teal);
+      color: white;
+    }
+
+    .hidden-project,
+    .project-card[data-visible="false"] {
+      display: none !important;
+    }
+
+    /* ABOUT */
+    #about {
+      background:
+        radial-gradient(circle at 10% 20%, rgba(0,166,200,0.10), transparent 28%),
+        radial-gradient(circle at 88% 30%, rgba(245,166,35,0.14), transparent 30%),
+        var(--cream);
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.35fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .about-card {
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(210,210,198,0.9);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .about-card:hover {
+      transform: translateY(-5px) rotate(-0.4deg);
+      box-shadow: 0 16px 34px rgba(0,0,0,0.12);
+      border-color: var(--aqua);
+    }
+
+    .profile-card {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.68)),
+        radial-gradient(circle at 15% 15%, rgba(0,166,200,0.18), transparent 35%),
+        radial-gradient(circle at 80% 86%, rgba(232,80,58,0.12), transparent 35%);
+    }
+
+    .profile-top {
+      display: grid;
+      grid-template-columns: 136px minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .profile-info {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .avatar {
+      width: 136px;
+      height: 136px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, var(--ice), var(--aqua));
+      border: 5px solid white;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.14);
+      display: grid;
+      place-items: center;
+      font-size: 52px;
+      transform: rotate(-3deg);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-card h3 {
+      font-family: var(--serif);
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: -0.035em;
+      margin-bottom: 8px;
+    }
+
+    .profile-line {
+      color: #666;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+      white-space: nowrap;
+    }
+
+    .profile-top .tag {
+      width: 100%;
+      max-width: 252px;
+      text-align: center;
+      font-size: 9px;
+      line-height: 1.45;
+      letter-spacing: 0.055em;
+      padding: 7px 10px;
+      white-space: normal;
+    }
+
+    .profile-blurb {
+      background: rgba(246,245,238,0.82);
+      border: 1px solid rgba(226,226,218,0.95);
+      border-radius: 18px;
+      padding: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .profile-blurb strong {
+      color: var(--cyan);
+    }
+
+    .idea-board {
+      background: rgba(220,238,238,0.52);
+      border: 1px solid rgba(185,223,225,0.95);
+      border-radius: 20px;
+      padding: 16px;
+    }
+
+    .idea-board-title {
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .idea-board-copy {
+      min-height: 48px;
+      color: #333;
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
+    .profile-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .profile-chip {
+      appearance: none;
+      border: 1px solid rgba(94,168,172,0.55);
+      background: rgba(255,255,255,0.72);
+      color: var(--dark);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .profile-chip:hover,
+    .profile-chip.is-active {
+      transform: translateY(-3px);
+      background: var(--cyan);
+      color: white;
+      border-color: var(--cyan);
+    }
+
+    .profile-facts {
+      display: grid;
+      gap: 10px;
+    }
+
+    .fact-row {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid #e2e2da;
+      border-radius: 16px;
+      padding: 12px 13px;
+    }
+
+    .fact-label,
+    .spec-label {
+      color: #999;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .fact-value,
+    .spec-value {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .about-status {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(220,238,238,0.64);
+      border: 1px solid rgba(185,223,225,0.95);
+      font-family: var(--mono);
+      font-size: 10px;
+      color: rgba(17,17,17,0.72);
+    }
+
+    .status-pill.wide {
+      grid-column: 1 / -1;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--cyan);
+      box-shadow: 0 0 0 5px rgba(0,166,200,0.12);
+      flex: 0 0 auto;
+    }
+
+    .about-main {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 16px;
+      height: 100%;
+    }
+
+    .about-hello {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 26px;
+      box-shadow: var(--shadow-lg);
+      padding: clamp(24px, 4vw, 38px);
+      position: relative;
+      overflow: hidden;
+    }
+
+/*     .about-hello::after {
+      content: "click the chips on the left";
+      position: absolute;
+      right: 22px;
+      bottom: 18px;
+      color: rgba(17,17,17,0.18);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    } */
+
+    .about-intro-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.6vw, 56px);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      margin-bottom: 18px;
+    }
+
+    .about-intro-title span {
+      color: var(--cyan);
+      display: block;
+    }
+
+    .about-bio {
+      color: #333;
+      max-width: 720px;
+      font-size: 16px;
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .about-bio:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-bio strong {
+      color: var(--cyan);
+    }
+
+    .process-intro {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 4px;
+    }
+
+    .process-note {
+      color: #666;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      text-align: right;
+    }
+
+    .about-bento {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .process-card {
+      min-height: 156px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .process-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -30px -42px auto;
+      width: 96px;
+      height: 96px;
+      border-radius: 999px;
+      background: rgba(0,166,200,0.10);
+    }
+
+    .process-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .process-card h4 {
+      font-family: var(--serif);
+      font-size: 21px;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .process-card p {
+      color: #555;
+      font-size: 13px;
+      line-height: 1.45;
+      max-width: 240px;
+    }
+
+    /* ABOUT SCRAPBOOK OPTION C */
+    .scrapbook-card {
+      min-height: 380px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.90), rgba(255,255,255,0.68)),
+        radial-gradient(circle at 14% 16%, rgba(0,166,200,0.16), transparent 34%),
+        radial-gradient(circle at 86% 80%, rgba(245,166,35,0.18), transparent 34%);
+    }
+
+    .scrapbook-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .scrapbook-hint {
+      color: rgba(17,17,17,0.45);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      text-align: right;
+    }
+
+    .scrapbook-frame {
+      position: relative;
+      min-height: 292px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(185,223,225,0.95);
+      background:
+        linear-gradient(135deg, rgba(220,238,238,0.88), rgba(246,245,238,0.92)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.32) 0 9px, transparent 9px 18px);
+      isolation: isolate;
+    }
+
+    .scrapbook-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(255,255,255,0.28), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(17,17,17,0.08));
+    }
+
+    .scrapbook-placeholder {
+      position: absolute;
+      inset: 18px;
+      z-index: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border: 1.5px dashed rgba(94,168,172,0.55);
+      border-radius: 18px;
+      color: rgba(94,168,172,0.75);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+      background: rgba(255,255,255,0.32);
+    }
+
+    .scrapbook-placeholder span {
+      color: rgba(17,17,17,0.38);
+    }
+
+    .scrapbook-main-image {
+      position: absolute;
+      inset: 18px;
+      z-index: 1;
+      width: calc(100% - 36px);
+      height: calc(100% - 36px);
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 16px 30px rgba(0,0,0,0.16);
+      transform: rotate(-1deg);
+      pointer-events: none;
+    }
+
+    .scrapbook-tape {
+      position: absolute;
+      z-index: 6;
+      width: 78px;
+      height: 24px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.52);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      pointer-events: none;
+    }
+
+    .scrapbook-tape.one {
+      top: 13px;
+      left: 48px;
+      transform: rotate(-7deg);
+    }
+
+    .scrapbook-tape.two {
+      right: 42px;
+      bottom: 34px;
+      transform: rotate(8deg);
+    }
+
+    .scrap-sticker {
+      position: absolute;
+      top: var(--y);
+      left: var(--x);
+      z-index: 7;
+      transform: rotate(var(--r));
+      appearance: none;
+      border: 0;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.13);
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+
+    .scrap-sticker:hover,
+    .scrap-sticker.is-active {
+      transform: rotate(var(--r)) translateY(-4px) scale(1.04);
+      box-shadow: 0 14px 26px rgba(0,0,0,0.18);
+      filter: saturate(1.06);
+    }
+
+    .scrap-sticker:active {
+      cursor: grabbing;
+    }
+
+    .scrap-note {
+      width: 112px;
+      min-height: 62px;
+      padding: 12px 11px;
+      border-radius: 8px;
+      background: #FFF1BE;
+      color: var(--dark);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.25;
+      letter-spacing: 0.04em;
+      text-align: left;
+    }
+
+    .scrap-note.blue {
+      background: #DCEEEE;
+    }
+
+    .scrap-note.peach {
+      background: #FBE3E0;
+    }
+
+    .scrap-bubble {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid rgba(94,168,172,0.45);
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .scrap-stamp {
+      padding: 7px 10px;
+      border-radius: 5px;
+      background: var(--cyan);
+      color: white;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .scrap-emoji {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.86);
+      font-size: 28px;
+      border: 1px solid rgba(255,255,255,0.85);
+    }
+
+    .scrapbook-caption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 13px;
+      border-radius: 16px;
+      background: rgba(220,238,238,0.58);
+      border: 1px solid rgba(185,223,225,0.85);
+    }
+
+    .scrapbook-caption p {
+      color: #333;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .scrapbook-caption strong {
+      color: var(--cyan);
+    }
+
+    .scrapbook-caption .mono {
+      color: rgba(17,17,17,0.42);
+      flex: 0 0 auto;
+    }
+
+    .spec-grid,
+    .about-chips,
+    .about-chip,
+    .spec-item {
+      /* Older layout classes kept here safely in case you reuse them later. */
+    }
+
+    /* RESUME */
+
+    .resume-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .resume-heading-block {
+      min-width: 0;
+    }
+
+    .resume-header .section-heading {
+      margin-bottom: 8px;
+    }
+
+    .resume-header .section-sub {
+      margin-bottom: 0;
+    }
+
+    .resume-download-wrap {
+      display: flex;
+      justify-content: flex-end;
+      flex-shrink: 0;
+      padding-top: 8px;
+    }
+
+    .resume-download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.74);
+      border: 1px solid rgba(94,168,172,0.36);
+      color: var(--dark);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.10);
+      backdrop-filter: blur(16px) saturate(1.18);
+      -webkit-backdrop-filter: blur(16px) saturate(1.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .resume-download-btn:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.94);
+      border-color: var(--teal);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.14);
+    }
+
+    .resume-download-icon {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--ice), var(--aqua));
+      font-size: 16px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    #resume {
+      background: var(--ice);
+    }
+
+    .resume-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .resume-box {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .resume-box h3 {
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--aqua);
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+
+    .resume-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .resume-list li {
+      position: relative;
+      padding-left: 14px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .resume-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--aqua);
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--cream);
+      padding-bottom: 10%;
+    }
+
+    .mail-popup {
+      max-width: 560px;
+      margin: 0 auto;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .mail-body {
+      padding: 36px;
+      text-align: center;
+    }
+
+    .mail-heading {
+      font-family: var(--serif);
+      font-size: 34px;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .mail-sub {
+      color: #555;
+      margin: 0 auto 26px;
+      max-width: 380px;
+    }
+
+    .contact-btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      padding: 22px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.05em;
+    }
+
+
+
+    /* SCROLL INTERACTIONS */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      z-index: 250;
+      background: rgba(17,17,17,0.06);
+      pointer-events: none;
+    }
+
+    .scroll-progress span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      transform: scaleX(0);
+      transform-origin: left center;
+      background: linear-gradient(90deg, var(--cyan), var(--teal), var(--orange), var(--red));
+      box-shadow: 0 0 18px rgba(0,166,200,0.35);
+      will-change: transform;
+    }
+
+    .scroll-status {
+      position: fixed;
+      right: 22px;
+      top: 22px;
+      z-index: 120;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border: 1px solid rgba(255,255,255,0.78);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.64);
+      backdrop-filter: blur(18px) saturate(1.25);
+      -webkit-backdrop-filter: blur(18px) saturate(1.25);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      color: rgba(17,17,17,0.72);
+      pointer-events: none;
+    }
+
+    .scroll-status strong {
+      color: var(--cyan);
+      font-weight: 800;
+    }
+
+    .scroll-orb {
+      position: fixed;
+      z-index: -1;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      filter: blur(4px);
+      opacity: 0.35;
+      pointer-events: none;
+      will-change: transform;
+      mix-blend-mode: multiply;
+    }
+
+    .scroll-orb-one {
+      top: 16%;
+      left: -80px;
+      background: radial-gradient(circle, rgba(0,166,200,0.42), rgba(0,166,200,0));
+    }
+
+    .scroll-orb-two {
+      top: 52%;
+      right: -110px;
+      background: radial-gradient(circle, rgba(232,80,58,0.32), rgba(232,80,58,0));
+    }
+
+    .scroll-orb-three {
+      bottom: 8%;
+      left: 18%;
+      background: radial-gradient(circle, rgba(245,166,35,0.26), rgba(245,166,35,0));
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 0.72s cubic-bezier(.2,.7,.2,1),
+        transform 0.72s cubic-bezier(.2,.7,.2,1),
+        filter 0.72s cubic-bezier(.2,.7,.2,1);
+      transition-delay: var(--delay, 0ms);
+      filter: blur(4px);
+      will-change: transform, opacity, filter;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    .project-card.reveal.is-visible:hover {
+      transform: translateY(-6px) scale(1.012);
+      box-shadow: 0 15px 34px rgba(0,0,0,0.13);
+    }
+
+    .project-card .card-img::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      z-index: 1;
+      background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.36), transparent 70%);
+      transform: translateX(-72%) rotate(8deg);
+      transition: transform 0.75s ease;
+      pointer-events: none;
+    }
+
+    .project-card:hover .card-img::before {
+      transform: translateX(72%) rotate(8deg);
+    }
+
+    .hero-window,
+    .finder-window,
+    .mail-popup {
+      will-change: transform;
+    }
+
+    .hero-window {
+      transform: rotate(1deg) translateY(var(--hero-y, 0px));
+    }
+
+    .finder-window {
+      transform: translateY(var(--finder-y, 0px));
+    }
+
+    .mail-popup {
+      transform: translateY(var(--mail-y, 0px));
+    }
+
+    .dock-nav {
+      transform: translateX(-50%) translateY(var(--dock-y, 0px)) scale(var(--dock-scale, 1));
+      transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .dock-nav.is-scrolling {
+      --dock-scale: 0.965;
+      background: rgba(255,255,255,0.74);
+      box-shadow: 0 18px 46px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.75);
+    }
+
+    @media (max-width: 760px) {
+      .scroll-status {
+        top: auto;
+        right: 14px;
+        bottom: 108px;
+        font-size: 9px;
+        padding: 7px 10px;
+      }
+
+      .scroll-orb {
+        width: 190px;
+        height: 190px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal,
+      .reveal.is-visible,
+      .hero-window,
+      .finder-window,
+      .mail-popup,
+      .scroll-orb,
+      .dock-nav {
+        transition: none !important;
+        transform: none !important;
+        filter: none !important;
+      }
+      .reveal { opacity: 1 !important; }
+      .scroll-progress span { transform: none !important; }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding-bottom: 118px;
+      }
+
+      nav.dock-nav {
+        bottom: 16px;
+        width: calc(100% - 22px);
+        max-width: 420px;
+        justify-content: space-between;
+        gap: 4px;
+        padding: 9px 10px 11px;
+        border-radius: 24px;
+      }
+
+      .nav-link {
+        min-width: 50px;
+      }
+
+      .dock-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+        font-size: 21px;
+      }
+
+      .dock-label {
+        font-size: 8px;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .section-wrap {
+        width: min(100% - 32px, 1080px);
+      }
+
+      .resume-header {
+        display: block;
+        margin-bottom: 28px;
+      }
+
+      .resume-download-wrap {
+        justify-content: flex-start;
+        padding-top: 16px;
+      }
+
+      .hero-grid,
+      .about-layout {
+        grid-template-columns: 1fr;
+      }
+
+      #home {
+        padding-top: 24px;
+        padding-bottom: 18px;
+        min-height: auto;
+      }
+
+      .hero-window {
+        transform: none;
+      }
+
+      .hero-image-placeholder {
+        min-height: 240px;
+      }
+
+      .finder-body {
+        padding: 20px;
+      }
+
+      .category-title-row {
+        display: block;
+      }
+
+      .category-note {
+        margin-top: 4px;
+        text-align: left;
+      }
+
+      .profile-top {
+        grid-template-columns: 112px minmax(0, 1fr);
+        gap: 14px;
+      }
+
+      .avatar {
+        width: 112px;
+        height: 112px;
+        border-radius: 28px;
+      }
+
+      .profile-line {
+        white-space: normal;
+      }
+
+      .profile-top .tag {
+        max-width: 100%;
+        font-size: 8.5px;
+      }
+
+      .about-bento,
+      .profile-facts,
+      .about-status {
+        grid-template-columns: 1fr;
+      }
+
+      .process-intro {
+        display: block;
+      }
+
+      .process-note {
+        margin-top: 6px;
+        text-align: left;
+      }
+
+      .scrapbook-card {
+        min-height: 360px;
+      }
+
+      .scrapbook-header,
+      .scrapbook-caption {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .scrapbook-frame {
+        min-height: 300px;
+      }
+
+      .scrap-note {
+        width: 100px;
+        min-height: 56px;
+        font-size: 9px;
+      }
+
+      .scrap-bubble,
+      .scrap-stamp {
+        font-size: 9px;
+      }
+
+      .scrap-emoji {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+  <div class="scroll-status" aria-hidden="true">
+    <span id="scrollSection">home</span>
+    <strong id="scrollPercent">0%</strong>
+  </div>
+  <div class="scroll-orb scroll-orb-one" data-speed="0.10" aria-hidden="true"></div>
+  <div class="scroll-orb scroll-orb-two" data-speed="0.16" aria-hidden="true"></div>
+  <div class="scroll-orb scroll-orb-three" data-speed="0.07" aria-hidden="true"></div>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="section-wrap hero-grid">
+      <div>
+        <span class="sticker">portfolio 2025</span>
+        <h1 class="hero-name">Vadora Tang <span>Portfolio</span></h1>
+        <p class="hero-kicker">Designer | Programmer | Innovator</p>
+        <p class="hero-copy">
+          I create user-centred <strong>digital, spatial, and interactive experiences</strong>
+          through design, technology, storytelling, and human behaviour.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn primary">View Projects</a>
+          <a href="#contact" class="btn">Contact Me</a>
+        </div>
+      </div>
+
+      <div class="hero-window">
+        <div class="window-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="window-title">fuji.jpg</span>
+        </div>
+
+        <!-- HERO IMAGE:
+             Put your hero image inside the img folder.
+             Then scroll to the bottom and set:
+             const HERO_IMAGE = "img/hero.jpg";
+        -->
+        <div class="hero-image-placeholder" id="heroImage">
+          [ replace this with your hero image later ]
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAC-STYLE DOCK NAVIGATION
+       Edit these icons/text if you want a different dock look.
+       This is fixed, so users can navigate while scrolling through all sections. -->
+  <nav class="dock-nav" aria-label="Main navigation">
+    <a href="#home" class="nav-link" aria-label="Home">
+      <span class="dock-icon">🏠</span>
+      <span class="dock-label">home</span>
+    </a>
+    <a href="#projects" class="nav-link" aria-label="Projects">
+      <span class="dock-icon">📁</span>
+      <span class="dock-label">projects</span>
+    </a>
+    <a href="#about" class="nav-link" aria-label="About">
+      <span class="dock-icon">👤</span>
+      <span class="dock-label">about</span>
+    </a>
+    <a href="#resume" class="nav-link" aria-label="Resume">
+      <span class="dock-icon">📄</span>
+      <span class="dock-label">resume</span>
+    </a>
+    <a href="#contact" class="nav-link" aria-label="Contact">
+      <span class="dock-icon">✉️</span>
+      <span class="dock-label">contact</span>
+    </a>
+  </nav>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-wrap">
+      <span class="sticker teal">folder: projects</span>
+      <h2 class="section-heading">Projects</h2>
+      <p class="section-sub">
+        A full archive of projects across spatial design, product systems, games, UX, web, and immersive media.
+      </p>
+
+      <div class="finder-window">
+        <div class="window-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="window-title">projects — organised by category</span>
+        </div>
+
+        <!-- Project cards will be generated here from the editable project list in the script below. -->
+        <div class="finder-body" id="projectCategories"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-wrap">
+      <span class="sticker orange">folder: about</span>
+      <h2 class="section-heading">About Me</h2>
+      <p class="section-sub">who I am + how I work</p>
+
+      <div class="about-layout">
+        <aside class="about-card profile-card">
+          <div class="profile-top">
+            <div class="avatar"><img src="img/about-me.jpeg" alt="Portrait of Vadora Tang" onerror="this.parentElement.innerHTML='🙋';"></div>
+            <div class="profile-info">
+              <h3>Vadora Tang</h3>
+              <p class="profile-line">@okvadora · Design &amp; AI</p>
+              <span class="tag">interactive designer in progress</span>
+            </div>
+          </div>
+
+<!--           <p class="profile-blurb">
+            I like turning <strong>“wait, how does this work?”</strong> into
+            <strong>“ohhh, that makes sense.”</strong> My sweet spot is where UI, tech,
+            storytelling, and real human behaviour meet.
+          </p> -->
+
+          <div class="idea-board" aria-label="Clickable design interests">
+            <p class="idea-board-title">pick a design lens</p>
+            <p class="idea-board-copy" id="aboutPlaygroundText">
+              UX + UI helps me make digital experiences feel clear, friendly, and easy to move through.
+            </p>
+            <div class="profile-chips">
+              <button type="button" class="profile-chip is-active" data-copy="UX + UI helps me make digital experiences feel clear, friendly, and easy to move through.">UX + UI</button>
+              <button type="button" class="profile-chip" data-copy="Interactive design lets me make websites, games, and systems feel more alive instead of static.">interactive design</button>
+              <button type="button" class="profile-chip" data-copy="Human-centred design keeps the work grounded in what people need, feel, and understand.">human-centred</button>
+              <button type="button" class="profile-chip" data-copy="Creative coding is where I test ideas quickly and turn messy concepts into something people can actually try.">creative coding</button>
+              <button type="button" class="profile-chip" data-copy="Spatial storytelling helps me think about movement, atmosphere, and how people experience a place.">spatial thinking</button>
+            </div>
+          </div>
+
+          <div class="profile-facts">
+            <div class="fact-row">
+              <div class="fact-label">Currently in:</div>
+              <div class="fact-value">SUTD Design and Artificial Intelligence</div>
+            </div>
+            <div class="fact-row">
+              <div class="fact-label">Diploma in</div>
+              <div class="fact-value">Immersive Media with Minor in Applied Psychology</div>
+            </div>
+            <div class="fact-row">
+              <div class="fact-label">Approach</div>
+              <div class="fact-value">Design with people at the centre, using technology as a tool to make experiences clearer, more intuitive, and more alive.</div>
+            </div>
+            <div class="fact-row">
+              <div class="fact-label">Things I do</div>
+              <div class="fact-value">Creative coding, graphic design, web design, 3D, prototyping, video editing and making digital things feel more alive</div>
+            </div>
+          </div>
+
+<!--           <div class="about-status">
+            <div class="status-pill wide"><span>currently designing with</span><span class="status-dot"></span></div>
+            <div class="status-pill"><span>tech + people</span><span>⌘</span></div>
+            <div class="status-pill"><span>mode</span><span>curious</span></div>
+          </div> -->
+        </aside>
+
+        <div class="about-main">
+          <div class="about-hello">
+            <p class="about-intro-title">Hi, I’m Vadora — <span>I make ideas interactive.</span></p>
+            <p class="about-bio">
+              I love designing with <strong>technology</strong>, but I always start with people —
+              how they move, feel, click, get confused, and eventually understand something.
+              My work usually sits somewhere between <strong>human-centred design, playful interaction,
+              spatial thinking, and creative coding</strong>.
+            </p>
+            <p class="about-bio">
+              I’m into projects that feel useful but still have personality: websites, games, AI-powered
+              systems, 3D spaces, event visuals, and small digital moments that make an experience feel
+              more intuitive and alive.
+            </p>
+          </div>
+
+<!--           <div class="process-intro">
+            <span class="tag">how I usually design</span>
+            <p class="process-note">from messy idea → usable experience</p>
+          </div> -->
+
+                    <div class="about-card scrapbook-card">
+            <div class="scrapbook-header">
+              <span class="tag">visual moodboard</span>
+              <p class="scrapbook-hint">click + drag the stickers</p>
+            </div>
+
+            <div class="scrapbook-frame" id="aboutScrapbook">
+              <div class="scrapbook-placeholder">
+                drop your favourite about image here<br>
+                <span>img/about-collage.jpg</span>
+              </div>
+
+              <!--
+                ABOUT SCRAPBOOK IMAGE:
+                Put one image in your img folder and name it:
+                img/about-collage.jpg
+
+                This can be a photo of you, a desk/workspace photo,
+                or a collage image you make in Canva.
+              -->
+              <img
+                class="scrapbook-main-image"
+                src="img/about-collage.jpg"
+                alt="About me visual collage"
+                onerror="this.style.display='none';"
+              />
+
+              <div class="scrapbook-tape one"></div>
+              <div class="scrapbook-tape two"></div>
+
+              <button type="button" class="scrap-sticker scrap-note is-active" style="--x: 7%; --y: 8%; --r: -7deg;" data-note="I usually start by watching how people behave, where they pause, and what feels confusing.">
+                human first
+              </button>
+
+              <button type="button" class="scrap-sticker scrap-bubble" style="--x: 58%; --y: 10%; --r: 5deg;" data-note="I like interfaces that feel friendly, useful, and just a little playful.">
+                UX + playful systems
+              </button>
+
+              <button type="button" class="scrap-sticker scrap-emoji" style="--x: 83%; --y: 24%; --r: -8deg;" data-note="I enjoy making small interactions that make a page feel more alive.">
+                ✨
+              </button>
+
+              <button type="button" class="scrap-sticker scrap-note blue" style="--x: 12%; --y: 67%; --r: 6deg;" data-note="Spatial thinking helps me design around movement, mood, and how people experience a place.">
+                spatial thinking
+              </button>
+
+              <button type="button" class="scrap-sticker scrap-stamp" style="--x: 43%; --y: 73%; --r: -3deg;" data-note="Creative coding lets me quickly test an idea instead of only imagining it.">
+                prototype & test
+              </button>
+
+              <button type="button" class="scrap-sticker scrap-note peach" style="--x: 70%; --y: 61%; --r: 7deg;" data-note="I like work that is useful, but still has a sense of personality and feeling.">
+                move anything!
+              </button>
+            </div>
+
+<!--             <div class="scrapbook-caption">
+              <p id="scrapbookNote">
+                <strong>human first:</strong> I usually start by watching how people behave, where they pause, and what feels confusing.
+              </p>
+              <span class="mono">drag me</span>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section id="resume">
+    <div class="section-wrap">
+      <div class="resume-header">
+        <div class="resume-heading-block">
+          <h2 class="section-heading">Resume + Accolades</h2>
+          <p class="section-sub">quick document preview</p>
+        </div>
+
+        <div class="resume-download-wrap">
+          <a
+            href="docs/VadoraTang_CVResume.pdf"
+            download
+            class="resume-download-btn"
+            aria-label="Download Vadora Tang resume PDF"
+          >
+            <span class="resume-download-icon">⬇</span>
+            <span>Download Resume</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="resume-grid">
+        <div class="resume-box">
+          <h3>Experience</h3>
+          <ul class="resume-list">
+            <li>Junior Designer Intern — Procon Events & Marketing</li>
+            <li>Digital Marketing Intern — Innowave Technology</li>
+            <li>Robotics Teacher — The Logic Coders</li>
+            <li>AI Workshop Instructor — Future Ready Academy</li>
+            <li>Social Media Manager — Gospel Light Youth</li>
+          </ul>
+        </div>
+
+        <div class="resume-box">
+          <h3>Education</h3>
+          <ul class="resume-list">
+            <li>BSc Design and Artificial Intelligence — SUTD</li>
+            <li>Diploma in Immersive Media with Minor in Applied Psychology</li>
+          </ul>
+        </div>
+
+        <div class="resume-box">
+          <h3>Certifications</h3>
+          <ul class="resume-list">
+            <li>Unity Certified Associate: Game Developer</li>
+            <li>Google Data Analytics</li>
+            <li>Google Business Intelligence</li>
+            <li>Workato Automation Pro I & II</li>
+          </ul>
+        </div>
+
+        <div class="resume-box">
+          <h3>Leadership + Awards</h3>
+          <ul class="resume-list">
+            <li>SUTD Volleyball Women's Captain</li>
+            <li>SUTD Ultimate Frisbee</li>
+            <li>Director's List</li>
+            <li>AR Project Contest — Consolation Prize</li>
+            <li>NYAA Silver and Bronze</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-wrap">
+      <div class="mail-popup">
+        <div class="window-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="window-title">new message</span>
+        </div>
+
+        <div class="mail-body">
+          <h2 class="mail-heading">say hi 👋</h2>
+          <p class="mail-sub">Let's build something thoughtful, playful, and human-centred.</p>
+
+          <div class="contact-btns">
+            <a href="mailto:vadoratangw@gmail.com" class="btn primary">Email</a>
+            <a href="https://www.linkedin.com/in/vadora-tang-567722211/" target="_blank" rel="noopener" class="btn">LinkedIn</a>
+            <a href="#projects" class="btn">View Projects</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Vadora Tang — designed & coded with plain HTML/CSS
+  </footer>
+
+  <script>
+    /*
+      =====================================================
+      EDIT IMAGES HERE
+      =====================================================
+
+      For deployment tonight:
+      - Create a folder named "img" beside this index.html.
+      - Put images inside it.
+      - Use simple lowercase file names with no spaces.
+        Good: img/kates-catering-cart.jpg
+        Avoid: img/Kate's Catering Cart Final Photo 1.JPG
+
+      IMPORTANT:
+      GitHub and Netlify are case-sensitive.
+      "img/Hero.JPG" and "img/hero.jpg" are different files online.
+    */
+
+    // HERO IMAGE LINK HERE:
+    // Put your hero image at: img/hero.jpg
+    // Then change the empty string below to "img/hero.jpg"
+    const HERO_IMAGE = "img/hero.jpg";
+
+    /*
+      =====================================================
+      EDIT PROJECT CATEGORIES HERE
+      =====================================================
+
+      To hide a full category:
+      Change visible: true to visible: false
+
+      Selected Work is currently hidden because the homepage already shows every project.
+    */
+    const projectCategories = [
+      {
+        id: "selected",
+        visible: false, // hidden for now because all projects are already shown below
+        title: "Selected Work",
+        note: "best first impression"
+      },
+      {
+        id: "spatial",
+        visible: true,
+        title: "Spatial + Product Design",
+        note: "architecture · 3D · systems · object design"
+      },
+      {
+        id: "interactive",
+        visible: true,
+        title: "Interactive + Games",
+        note: "VR · games · immersive media · storytelling"
+      },
+      {
+        id: "uxweb",
+        visible: true,
+        title: "UX + Web",
+        note: "apps · websites · research · digital interfaces"
+      },
+      {
+        id: "graphic-events",
+        visible: true,
+        title: "Graphic + Event Design",
+        note: "event branding · production graphics · professional design"
+      }
+    ];
+
+    /*
+      =====================================================
+      EDIT PROJECT CARDS HERE
+      =====================================================
+
+      To hide ONE card:
+      visible: false
+
+      To show ONE card:
+      visible: true
+
+      To control the View Project button:
+      status: "ready"      // shows the View Project button
+      status: "not-ready"  // hides the View Project button
+
+      To add/change picture:
+      1. Put image in your images folder.
+      2. Set image: "img/file-name.jpg"
+
+      To remove picture but keep the coloured placeholder:
+      image: ""
+
+      Project page links are automatic now:
+      - If link: "#", the card opens project.html?project=project-slug
+      - Example: DQueue opens project.html?project=dqueue
+
+      To override with another link:
+      link: "https://..."
+      or link: "files/project-name.pdf"
+    */
+    const projects = [
+      // IMAGE: Kate's Catering Cart
+      // Suggested file name: img/kate-catering.jpeg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "selected",
+        title: "Kate's Catering Cart",
+        tag: "Product / Systems",
+        description: "A portable exhaust system designed for Kate's Catering, balancing mobility, safety, and catering operations.",
+        meta: "12-week industry-school project",
+        image: "img/kate-catering.jpeg",
+        fallback: "linear-gradient(135deg,#DCEEEE,#B9DFE1)",
+        link: "#"
+      },
+
+      // IMAGE: The Antara Ubud Water House
+      // Suggested file name: img/antara-ubud-water-house.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "selected",
+        title: "The Antara Ubud Water House",
+        tag: "Architecture",
+        description: "A 3D architecture project using Rhino, shaped by water flow, privacy, openness, and the hilled landscape of Ubud.",
+        meta: "3D spatial project",
+        image: "img/antara.png",
+        fallback: "linear-gradient(135deg,#D7E8FF,#A9C8F5)",
+        link: "#"
+      },
+
+      // IMAGE: Our Lion City VR
+      // Suggested file name: img/our-lion-city-vr.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "selected",
+        title: "Our Lion City VR",
+        tag: "VR / Game",
+        description: "A VR game-style project exploring Singapore through immersive interaction and spatial storytelling.",
+        meta: "4-week project",
+        image: "img/ourlioncity.jpeg",
+        fallback: "linear-gradient(135deg,#E7D8FF,#BFA6F2)",
+        link: "#"
+      },
+
+      // IMAGE: DQueue
+      // Suggested file name: img/dqueue.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "selected",
+        title: "DQueue",
+        tag: "UX / App",
+        description: "A UX proposal for a mobile and watch app designed to improve queuing experiences through clearer digital touchpoints.",
+        meta: "mobile + watch UX",
+        image: "img/DQueue.png",
+        fallback: "linear-gradient(135deg,#FFE6C7,#F5BF73)",
+        link: "#"
+      },
+
+      // IMAGE: Sojourn
+      // Suggested file name: img/sojourn.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "selected",
+        title: "Sojourn",
+        tag: "Game / Storytelling",
+        description: "A horror game-style project focused on atmosphere, pacing, environment, and player experience.",
+        meta: "4-week project",
+        image: "img/sojourn.jpeg",
+        fallback: "linear-gradient(135deg,#222,#666)",
+        link: "#"
+      },
+
+      // IMAGE: Procon Events & Marketing
+      // Suggested file name: img/procon-events.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "selected",
+        title: "Procon Events & Marketing",
+        tag: "Professional",
+        description: "Junior designer work for events including House of Sephora, TAG Heuer F1 ION, Audemars Piguet, and Penfolds.",
+        meta: "5-month internship",
+        image: "img/procon.png",
+        fallback: "linear-gradient(135deg,#FBE3E0,#F0A098)",
+        link: "#"
+      },
+
+      // IMAGE: Kate's Catering Cart
+      // Suggested file name: img/kate-catering.jpeg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "spatial",
+        title: "Kate's Catering Cart",
+        tag: "Product System",
+        description: "A mobile catering cart with an integrated portable exhaust system for real catering constraints.",
+        meta: "12-week industry project",
+        image: "img/kate-catering.jpeg",
+        fallback: "linear-gradient(135deg,#DCEEEE,#B9DFE1)",
+        link: "#"
+      },
+
+      // IMAGE: Lower Car Suppressor
+      // Suggested file name: img/lower-car-suppressor.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "spatial",
+        title: "Lower Car Suppressor",
+        tag: "Computational Design",
+        description: "A generative design exploration for a lower car suppressor, focusing on optimisation, form, and performance.",
+        meta: "3-week project",
+        image: "img/car-suspension.jpeg",
+        fallback: "linear-gradient(135deg,#E8E8E8,#B9B9B9)",
+        link: "#"
+      },
+
+      // IMAGE: The Antara Ubud Water House
+      // Suggested file name: img/antara-ubud-water-house.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "spatial",
+        title: "The Antara Ubud Water House",
+        tag: "Architecture",
+        description: "A Rhino-based house project shaped by water, openness, privacy, and landscape flow.",
+        meta: "4-week project",
+        image: "img/antara.png",
+        fallback: "linear-gradient(135deg,#D7E8FF,#A9C8F5)",
+        link: "#"
+      },
+
+      // IMAGE: Bunny Island
+      // Suggested file name: img/bunny-island.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "spatial",
+        title: "Bunny Island",
+        tag: "3D Environment",
+        description: "A 3D environment project exploring world-building, mood, scale, and playful environmental design.",
+        meta: "4-week project",
+        image: "img/my-island.jpeg",
+        fallback: "linear-gradient(135deg,#D8F5D2,#99D893)",
+        link: "#"
+      },
+
+      // IMAGE: Our Lion City VR
+      // Suggested file name: img/our-lion-city-vr.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "interactive",
+        title: "Our Lion City VR",
+        tag: "VR Game",
+        description: "An immersive VR project using game-like interaction to experience Singapore through spatial storytelling.",
+        meta: "4-week project",
+        image: "img/ourlioncity.jpeg",
+        fallback: "linear-gradient(135deg,#E7D8FF,#BFA6F2)",
+        link: "#"
+      },
+
+      // IMAGE: Sojourn
+      // Suggested file name: img/sojourn.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "interactive",
+        title: "Sojourn",
+        tag: "Horror Game",
+        description: "A game project developing suspense, setting, atmosphere, and player journey through horror conventions.",
+        meta: "4-week project",
+        image: "img/sojourn.jpeg",
+        fallback: "linear-gradient(135deg,#222,#666)",
+        link: "#"
+      },
+
+      // IMAGE: Bunny Island
+      // Suggested file name: img/bunny-island.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "interactive",
+        title: "Bunny Island",
+        tag: "3D Game Environment",
+        description: "A 3D environment project focused on playful world-building and environmental storytelling.",
+        meta: "4-week project",
+        image: "img/my-island.jpeg",
+        fallback: "linear-gradient(135deg,#D8F5D2,#99D893)",
+        link: "#"
+      },
+
+      // IMAGE: Supper Nostalgia
+      // Suggested file name: img/supper-nostalgia.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "interactive",
+        title: "Supper Nostalgia",
+        tag: "Visual Storytelling",
+        description: "A Doodle People x NP school project postcard exploring local food memories and nostalgic visual language.",
+        meta: "3-week project",
+        image: "img/super-nostalgia.jpeg",
+        fallback: "linear-gradient(135deg,#FFF1BE,#F7C85D)",
+        link: "#"
+      },
+
+      // IMAGE: DQueue
+      // Suggested file name: img/dqueue.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "uxweb",
+        title: "DQueue",
+        tag: "UX Proposal",
+        description: "A mobile and watch app UX proposal for making queue systems easier to understand and manage.",
+        meta: "2-week project",
+        image: "img/DQueue.png",
+        fallback: "linear-gradient(135deg,#FFE6C7,#F5BF73)",
+        link: "#"
+      },
+
+      // IMAGE: Fashion Microfibre Website
+      // Suggested file name: img/fashion-microfibre.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "uxweb",
+        title: "Fashion Microfibre Website",
+        tag: "Web / Research",
+        description: "A website analysing swimwear fabric microfibre impact, connecting fashion, material research, and sustainability.",
+        meta: "2-week project",
+        image: "img/fashion-website.jpeg",
+        fallback: "linear-gradient(135deg,#CDEFE7,#8DD7C8)",
+        link: "#"
+      },
+
+      // IMAGE: Innowave Technology Website Revamp
+      // Suggested file name: img/innowave-website-revamp.jpg
+      {
+        visible: true,
+        status: "not-ready",
+        category: "uxweb",
+        title: "Innowave Technology Website Revamp",
+        tag: "Web / Professional",
+        description: "Website analysis, restructuring, and redesign support through marketing consultation and content organisation.",
+        meta: "4-week internship",
+        image: "img/innowave.png",
+        fallback: "linear-gradient(135deg,#CCE8FF,#85C7F0)",
+        link: "#"
+      },
+
+      // IMAGE: Procon Events & Marketing
+      // File name: img/procon.png
+      {
+        visible: true,
+        status: "not-ready",
+        category: "graphic-events",
+        title: "Procon Events & Marketing",
+        tag: "Graphic / Event Design",
+        description: "Graphic design and production support for branded events, including House of Sephora, TAG Heuer F1 ION, Audemars Piguet, and Penfolds.",
+        meta: "5-month internship",
+        image: "img/procon.png",
+        fallback: "linear-gradient(135deg,#FBE3E0,#F0A098)",
+        link: "#"
+      }
+    ];
+
+    function escapeHTML(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function slugify(text) {
+      return String(text)
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[’']/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function renderProjectCard(project) {
+      const hasImage = Boolean(project.image);
+      const imageHTML = hasImage
+        ? `<img src="${escapeHTML(project.image)}" alt="${escapeHTML(project.title)} project preview" loading="lazy" onerror="this.remove(); this.parentElement.classList.remove('has-image');" />`
+        : "";
+
+      // PROJECT PAGE LINK:
+      // If link is kept as "#", this automatically links to project.html?project=project-name
+      // Example: DQueue → project.html?project=dqueue
+      const autoProjectLink = `project.html?project=${slugify(project.title)}`;
+      const cardLink = project.link && project.link !== "#" ? project.link : autoProjectLink;
+      const isExternalLink = /^https?:\/\//.test(cardLink);
+
+      // STATUS CHECK:
+      // status: "ready" shows the View Project button
+      // status: "not-ready" hides the View Project button
+      const isReady = project.status === "ready";
+
+      const viewProjectButton = isReady
+        ? `<a href="${escapeHTML(cardLink)}" class="open-file-btn" ${isExternalLink ? 'target="_blank" rel="noopener"' : ""}>view project ↗</a>`
+        : "";
+
+      return `
+        <article class="project-card" data-visible="${project.visible}" data-status="${escapeHTML(project.status || "not-ready")}">
+          <div class="card-img ${hasImage ? "has-image" : ""}" style="--fallback-bg:${project.fallback};">
+            ${imageHTML}
+          </div>
+          <div class="card-body">
+            <span class="tag">${escapeHTML(project.tag)}</span>
+            <h4 class="card-title">${escapeHTML(project.title)}</h4>
+            <p class="card-desc">${escapeHTML(project.description)}</p>
+            <p class="card-meta">${escapeHTML(project.meta)}</p>
+            ${viewProjectButton}
+          </div>
+        </article>
+      `;
+    }
+
+    function renderProjects() {
+      const container = document.getElementById("projectCategories");
+
+      container.innerHTML = projectCategories
+        .filter(category => category.visible)
+        .map(category => {
+          const cards = projects.filter(project => project.category === category.id && project.visible);
+
+          // If a category has no visible cards, hide the whole category automatically.
+          if (cards.length === 0) return "";
+
+          return `
+            <div class="project-category">
+              <div class="category-title-row">
+                <h3 class="category-title">${escapeHTML(category.title)}</h3>
+                <p class="category-note">${escapeHTML(category.note)}</p>
+              </div>
+              <div class="cards-grid">
+                ${cards.map(renderProjectCard).join("")}
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function setHeroImage() {
+      const hero = document.getElementById("heroImage");
+      if (!hero || !HERO_IMAGE) return;
+
+      hero.style.backgroundImage = `url('${HERO_IMAGE}')`;
+      hero.classList.add("has-image");
+      hero.textContent = "";
+    }
+
+    renderProjects();
+    setHeroImage();
+
+    // Scroll progress, parallax, and reveal animations
+    const progressBar = document.getElementById("scrollProgress");
+    const scrollPercent = document.getElementById("scrollPercent");
+    const scrollSection = document.getElementById("scrollSection");
+    const dockNav = document.querySelector(".dock-nav");
+    const heroWindow = document.querySelector(".hero-window");
+    const finderWindow = document.querySelector(".finder-window");
+    const mailPopup = document.querySelector(".mail-popup");
+    const scrollOrbs = document.querySelectorAll(".scroll-orb");
+    let scrollTicking = false;
+    let dockTimer;
+
+    function prepareScrollAnimations() {
+      const revealTargets = [
+        ...document.querySelectorAll("#home .sticker, .hero-name, .hero-kicker, .hero-copy, .hero-actions, .hero-window"),
+        ...document.querySelectorAll(".section-heading, .section-sub, .finder-window, .project-category, .project-card, .about-card, .resume-header, .resume-box, .mail-popup")
+      ];
+
+      revealTargets.forEach((el, index) => {
+        el.classList.add("reveal");
+        el.style.setProperty("--delay", `${Math.min(index * 35, 280)}ms`);
+      });
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+
+      revealTargets.forEach(el => revealObserver.observe(el));
+    }
+
+    function updateScrollEffects() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const progress = Math.min(1, Math.max(0, scrollTop / maxScroll));
+
+      if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+      if (scrollPercent) scrollPercent.textContent = `${Math.round(progress * 100)}%`;
+
+      if (heroWindow) heroWindow.style.setProperty("--hero-y", `${scrollTop * -0.035}px`);
+      if (finderWindow) finderWindow.style.setProperty("--finder-y", `${Math.sin(progress * Math.PI) * -10}px`);
+      if (mailPopup) mailPopup.style.setProperty("--mail-y", `${(1 - progress) * 10}px`);
+
+      scrollOrbs.forEach((orb, index) => {
+        const speed = Number(orb.dataset.speed || 0.1);
+        const direction = index % 2 === 0 ? 1 : -1;
+        orb.style.transform = `translate3d(${direction * progress * 38}px, ${scrollTop * speed}px, 0)`;
+      });
+
+      scrollTicking = false;
+    }
+
+    function requestScrollUpdate() {
+      if (!scrollTicking) {
+        window.requestAnimationFrame(updateScrollEffects);
+        scrollTicking = true;
+      }
+
+      if (dockNav) {
+        dockNav.classList.add("is-scrolling");
+        clearTimeout(dockTimer);
+        dockTimer = setTimeout(() => dockNav.classList.remove("is-scrolling"), 180);
+      }
+    }
+
+    prepareScrollAnimations();
+    updateScrollEffects();
+    window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+    window.addEventListener("resize", updateScrollEffects);
+
+
+
+    // About section clickable chips
+    const aboutPlaygroundText = document.getElementById("aboutPlaygroundText");
+    const aboutProfileChips = document.querySelectorAll(".profile-chip[data-copy]");
+
+    aboutProfileChips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        aboutProfileChips.forEach(item => item.classList.remove("is-active"));
+        chip.classList.add("is-active");
+        if (aboutPlaygroundText) aboutPlaygroundText.textContent = chip.dataset.copy;
+      });
+    });
+
+    // About scrapbook stickers
+    const scrapbookFrame = document.getElementById("aboutScrapbook");
+    const scrapbookNote = document.getElementById("scrapbookNote");
+    const scrapbookStickers = document.querySelectorAll(".scrap-sticker[data-note]");
+
+    function activateScrapSticker(sticker) {
+      scrapbookStickers.forEach(item => item.classList.remove("is-active"));
+      sticker.classList.add("is-active");
+
+      if (scrapbookNote) {
+        const label = sticker.textContent.trim().replace(/\s+/g, " ");
+        scrapbookNote.innerHTML = `<strong>${escapeHTML(label)}:</strong> ${escapeHTML(sticker.dataset.note)}`;
+      }
+    }
+
+    scrapbookStickers.forEach(sticker => {
+      let startX = 0;
+      let startY = 0;
+      let startLeft = 0;
+      let startTop = 0;
+      let hasDragged = false;
+
+      sticker.addEventListener("pointerdown", event => {
+        if (!scrapbookFrame) return;
+
+        hasDragged = false;
+        sticker.setPointerCapture(event.pointerId);
+
+        const frameRect = scrapbookFrame.getBoundingClientRect();
+        const stickerRect = sticker.getBoundingClientRect();
+
+        startX = event.clientX;
+        startY = event.clientY;
+        startLeft = stickerRect.left - frameRect.left;
+        startTop = stickerRect.top - frameRect.top;
+      });
+
+      sticker.addEventListener("pointermove", event => {
+        if (!scrapbookFrame || !sticker.hasPointerCapture(event.pointerId)) return;
+
+        const dx = event.clientX - startX;
+        const dy = event.clientY - startY;
+
+        if (Math.abs(dx) + Math.abs(dy) > 4) {
+          hasDragged = true;
+          sticker.dataset.dragged = "true";
+        }
+
+        if (!hasDragged) return;
+
+        const frameRect = scrapbookFrame.getBoundingClientRect();
+        const stickerRect = sticker.getBoundingClientRect();
+
+        const maxLeft = frameRect.width - stickerRect.width;
+        const maxTop = frameRect.height - stickerRect.height;
+
+        const newLeft = Math.max(0, Math.min(maxLeft, startLeft + dx));
+        const newTop = Math.max(0, Math.min(maxTop, startTop + dy));
+
+        sticker.style.setProperty("--x", `${(newLeft / frameRect.width) * 100}%`);
+        sticker.style.setProperty("--y", `${(newTop / frameRect.height) * 100}%`);
+      });
+
+      sticker.addEventListener("pointerup", event => {
+        if (sticker.hasPointerCapture(event.pointerId)) {
+          sticker.releasePointerCapture(event.pointerId);
+        }
+
+        if (!hasDragged) {
+          activateScrapSticker(sticker);
+        }
+
+        window.setTimeout(() => {
+          sticker.dataset.dragged = "false";
+        }, 0);
+      });
+
+      sticker.addEventListener("click", () => {
+        if (sticker.dataset.dragged === "true") return;
+        activateScrapSticker(sticker);
+      });
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Active nav highlight
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.remove("active"));
+          const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add("active");
+          if (scrollSection) scrollSection.textContent = entry.target.id;
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
