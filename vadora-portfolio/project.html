@@ -5,34 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project — Vadora Tang</title>
 
-  <!--
-    PROJECT PAGE TEMPLATE
-
-    HOW THIS WORKS
-    1. Keep this file named project.html beside your index.html.
-    2. Your project cards link here like:
-       project.html?project=dqueue
-       project.html?project=kates-catering-cart
-    3. Scroll to "EDIT PROJECT PAGES HERE" below.
-    4. Edit the text and image paths for each project.
-
-    IMAGE FOLDER STRUCTURE
-    portfolio/
-    ├── index.html
-    ├── project.html
-    └── images/
-        ├── dqueue-hero.jpg
-        ├── dqueue-01.jpg
-        └── kates-catering-cart-hero.jpg
-
-    TO ADD A NEW PROJECT PAGE
-    1. Copy one project block in PROJECTS.
-    2. Give it a unique slug, for example:
-       "my-new-project": { ... }
-    3. Link to it from index.html with:
-       project.html?project=my-new-project
-  -->
-
   <style>
     :root {
       --cream: #F6F5EE;
@@ -68,6 +40,7 @@
       font-size: 15px;
       line-height: 1.65;
       overflow-x: hidden;
+      padding-bottom: 112px;
     }
 
     a {
@@ -80,43 +53,25 @@
       display: block;
     }
 
-    nav {
+    nav.dock-nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
       z-index: 100;
-      height: 44px;
-      padding: 0 32px;
+      width: max-content;
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(246,245,238,0.84);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--aqua);
+      justify-content: center;
+      transition: transform 0.22s ease;
     }
 
-    .nav-name {
-      margin-right: auto;
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+    .dock-nav.is-scrolling {
+      transform: translateX(-50%) scale(0.965);
     }
 
-    .nav-link {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      letter-spacing: 0.05em;
-      color: var(--teal);
-      padding: 5px 11px;
-      border-radius: 999px;
-      transition: background 0.18s, color 0.18s;
-    }
-
-    .nav-link:hover {
-      background: var(--aqua);
-      color: var(--dark);
+    .dock-back-btn {
+      box-shadow: 0 14px 38px rgba(0,0,0,0.18);
     }
 
     .section-wrap {
@@ -347,6 +302,42 @@
       line-height: 1.55;
     }
 
+    .hmw-card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .hmw-eyebrow {
+      display: inline-block;
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--aqua);
+      padding-bottom: 5px;
+      margin-bottom: 14px;
+    }
+
+    .hmw-card h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      margin-bottom: 10px;
+    }
+
+    .hmw-card p {
+      max-width: 880px;
+      font-size: 20px;
+      line-height: 1.5;
+      color: #242424;
+    }
+
     .wide-card {
       background: white;
       border: 1px solid #ddd;
@@ -381,7 +372,7 @@
     }
 
     .image-slot {
-      min-height: 260px;
+      min-height: 420px;
       background: linear-gradient(135deg, #ffffff, var(--aqua));
       border: 1px solid #ddd;
       border-radius: 12px;
@@ -402,6 +393,141 @@
 
     .image-slot.has-image {
       color: transparent;
+    }
+
+    .image-slot.is-hidden {
+      display: none;
+    }
+
+    .image-slot.contain-image {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-color: white;
+    }
+
+    .image-slot.has-video {
+      padding: 0;
+      background: #111;
+      color: inherit;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+
+    .image-slot video {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      object-fit: contain;
+      display: block;
+      background: #111;
+    }
+
+    .image-slot.pdf-preview {
+      min-height: 420px;
+      padding: 0;
+      background: white;
+      color: inherit;
+      display: block;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+
+    .pdf-preview iframe {
+      width: 100%;
+      height: 360px;
+      border: 0;
+      display: block;
+      background: white;
+    }
+
+    .pdf-preview-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      border-top: 1px solid #e5e5e5;
+      background: #fafafa;
+    }
+
+    .pdf-preview-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    .pdf-preview-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .project-actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .report-btn {
+      background: var(--dark);
+      color: white;
+    }
+
+    .report-btn:hover {
+      background: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    .image-slot.video-slot {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .image-slot.video-slot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.28);
+    }
+
+    .video-link {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: white;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .video-play {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      padding-left: 4px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .video-label {
+      background: rgba(0,0,0,0.45);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 10px;
     }
 
     .next-section {
@@ -439,13 +565,26 @@
       margin-bottom: 24px;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      .dock-nav,
+      .dock-nav.is-scrolling {
+        transition: none !important;
+      }
+    }
+
     @media (max-width: 820px) {
-      nav {
-        padding: 0 14px;
+      body {
+        padding-bottom: 104px;
       }
 
-      .nav-name {
-        display: none;
+      nav.dock-nav {
+        bottom: 16px;
+        width: auto;
+        max-width: calc(100% - 22px);
+        padding: 8px 10px;
+        border-radius: 999px;
       }
 
       .section-wrap {
@@ -465,18 +604,31 @@
       .project-description {
         font-size: 16px;
       }
+
+      .image-slot,
+      .image-slot.pdf-preview {
+        min-height: 480px;
+      }
+
+      .image-slot video {
+        min-height: 480px;
+      }
+
+      .pdf-preview iframe {
+        height: 420px;
+      }
+
+      .pdf-preview-bar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 
 <body>
-  <nav>
-    <span class="nav-name">VADORA TANG</span>
-    <a href="index.html#home" class="nav-link">home</a>
-    <a href="index.html#projects" class="nav-link">projects</a>
-    <a href="index.html#about" class="nav-link">about</a>
-    <a href="index.html#resume" class="nav-link">resume</a>
-    <a href="index.html#contact" class="nav-link">contact</a>
+  <nav class="dock-nav" aria-label="Project page navigation">
+    <a href="index.html#projects" class="btn primary dock-back-btn" aria-label="Back to projects section">← Back to Projects</a>
   </nav>
 
   <main id="app"></main>
@@ -486,245 +638,214 @@
   </footer>
 
   <script>
-    /*
-      =====================================================
-      EDIT PROJECT PAGES HERE
-      =====================================================
-
-      IMPORTANT:
-      Each project has a slug. The slug is the link name after ?project=
-      Example:
-      project.html?project=dqueue loads the "dqueue" block below.
-
-      IMAGE COMMENTS:
-      Each project has comments showing where to link the hero image
-      and supporting images. Keep all images inside the images folder.
-    */
-
     const PROJECTS = {
-      // =====================================================
-      // PROJECT: Kate's Catering Cart
-      // PAGE LINK: project.html?project=kates-catering-cart
-      // HERO IMAGE: images/kates-catering-cart-hero.jpg
-      // GALLERY IMAGE 1: images/kates-catering-cart-01.jpg
-      // GALLERY IMAGE 2: images/kates-catering-cart-02.jpg
-      // =====================================================
       "kates-catering-cart": {
         title: "Kate's Catering Cart",
-        subtitle: "Portable exhaust system for catering operations",
-        category: "Product / Systems Design",
-        duration: "12 weeks",
-        role: "Product designer, systems researcher, prototyper",
-        tools: "Sketching, CAD, prototyping, user research",
-        year: "School project",
-        heroImage: "",
-        heroLabel: "Add hero image: images/kates-catering-cart-hero.jpg",
-        description: "Kate's Catering Cart is a portable exhaust system designed for a catering company, focusing on mobility, safety, workflow, and operational constraints. The project balances a practical product system with user-centred design, allowing catering staff to work in temporary event spaces while managing ventilation and spatial efficiency.",
-        brief: "Design a mobile product system that responds to real catering constraints while staying compact, usable, and easy to move.",
-        process: "The project considered movement, exhaust direction, work zones, storage, and the physical experience of catering staff. Form and function were developed together through research, layout testing, and iteration.",
-        outcome: "The final concept proposes a portable cart system that improves event food preparation workflow while addressing ventilation and mobility needs.",
-        images: ["", ""]
+        subtitle: "Portable live-cooking exhaust system for indoor corporate catering",
+        category: "Product Systems / Industry Project",
+        duration: "12 weeks (School Project)",
+        role: "Product designer, workflow researcher, prototyper",
+        tools: "Sketching, CAD, physical prototyping, exhaust testing, user research",
+        year: "2026",
+        hmw: "How might we enable safe, flame-free and engaging live cooking for steak and satay in indoor corporate spaces, while eliminating smoke and odour in a portable, professional setup?",
+        problem: "Indoor corporate catering often limits live cooking because smoke, odour, open flames, bulky transport, and unclear workflows make steak and satay difficult to serve safely in enclosed spaces. For Kate's Catering, the challenge was to create a portable system that could support live cooking while protecting customers, chefs, movers, and event operations.",
+        approach: "The project was developed through stakeholder research, persona mapping, workflow analysis, and physical testing. We studied chef, logistics, and customer pain points, then tested exhaust placement, table dimensions, leg mechanisms, materials, storage, and mobility. Key decisions included front-facing suction to capture smoke at the source, a modular exhaust head for different cookware heights, foldable legs for faster setup, lockable caster wheels for movement, and a compact table layout based on human reach.",
+        solution: "The final concept is a portable exhaust cart that combines induction cooking, front-facing suction, modular fume extraction, integrated storage, foldable setup, and a professional service surface. It supports safer flame-free cooking, reduces smoke and odour, improves setup and teardown, and creates a cleaner live-cooking experience for indoor corporate events.",
+        heroImage: "img/kate-catering.jpeg",
+        heroLabel: "Hero image: img/kate-catering.jpeg",
+        description: "Kate's Catering Cart is a portable exhaust system designed for a catering company, focusing on mobility, safety, workflow, and operational constraints. Beyond solving ventilation, it also enhances the customer experience by turning live cooking into a cleaner form of culinary theatre. Since indoor steak and satay cooking is difficult without an exhaust system, the cart helps unlock a new catering format for corporate spaces and pushes live catering toward a safer, more professional, and more engaging direction.",
+        brief: "Design a mobile product system that enables flame-free indoor live cooking while managing smoke, odour, transport, setup, and service presentation.",
+        process: "The project considered real catering constraints across cooking, movement, setup, teardown, exhaust direction, storage, cleaning, and customer-facing presentation. Testing focused on how smoke travels, where suction should be placed, how quickly the cart can be assembled, and how the system can stay compact while supporting a professional live station.",
+        outcome: "KateCart meets three key needs: for customers, it creates smoke-free culinary theatre with a clean and cohesive aesthetic; for chefs, it offers organised workflow and built-in smoke control for high-heat cooking; and for operations, it improves portability, quick setup, easy cleanup, and teardown. As this is an industry project and Kate's Catering is continuing development, the full final product cannot be shown publicly.",
+        images: [
+          "img/kates-catering-cart-01.jpg",
+          "https://youtu.be/j2FFKZm37x8?si=3rMcdcsvyF3803N5"
+        ]
       },
 
-      // =====================================================
-      // PROJECT: Lower Car Suppressor
-      // PAGE LINK: project.html?project=lower-car-suppressor
-      // HERO IMAGE: images/lower-car-suppressor-hero.jpg
-      // GALLERY IMAGE 1: images/lower-car-suppressor-01.jpg
-      // GALLERY IMAGE 2: images/lower-car-suppressor-02.jpg
-      // =====================================================
       "lower-car-suppressor": {
         title: "Lower Car Suppressor",
         subtitle: "Generative design exploration for automotive form optimisation",
         category: "Computational / Product Design",
-        duration: "3 weeks",
-        role: "Designer, form researcher",
-        tools: "Generative design workflow, CAD, digital modelling",
+        duration: "2 weeks (School Project)",
+        role: "Designer, CAD modeller",
+        tools: "Generative design workflow, CAD, digital modelling, Fusion 360",
         year: "School project",
-        heroImage: "",
-        heroLabel: "Add hero image: images/lower-car-suppressor-hero.jpg",
+        heroImage: "img/car-suspension.jpeg",
+        heroLabel: "Hero image: img/car-suspension.jpeg",
         description: "Lower Car Suppressor is a short generative design study exploring how computational workflows can produce optimised forms for an automotive component. The project focuses on performance, weight, structural logic, and the visual language that emerges from design constraints.",
         brief: "Explore a component through generative design and understand how constraints can guide form development.",
         process: "The work involved defining loads, constraints, and spatial boundaries before evaluating generated forms for function and manufacturability.",
         outcome: "The result is a design exploration that demonstrates how optimisation can inform product form and performance thinking.",
-        images: ["", ""]
+        images: [
+          "https://youtu.be/N6gWsdYlmfc",
+          "https://youtu.be/R24QFNIU9ks"
+        ],
+        reportFile: "docs/AID%20Team%202.pdf",
+        reportLabel: "Download full report"
       },
 
-      // =====================================================
-      // PROJECT: The Antara Ubud Water House
-      // PAGE LINK: project.html?project=the-antara-ubud-water-house
-      // HERO IMAGE: images/antara-ubud-water-house-hero.jpg
-      // GALLERY IMAGE 1: images/antara-ubud-water-house-01.jpg
-      // GALLERY IMAGE 2: images/antara-ubud-water-house-02.jpg
-      // =====================================================
       "the-antara-ubud-water-house": {
         title: "The Antara Ubud Water House",
-        subtitle: "Architecture project shaped by water, privacy, and landscape flow",
-        category: "Architecture / Spatial Design",
-        duration: "3D spatial project",
+        subtitle: "A relaxing Ubud getaway villa shaped by water, privacy, and landscape flow",
+        category: "Architecture / 3D Spatial Design",
+        duration: "3 week (School Project)",
         role: "Spatial designer, Rhino modeller",
         tools: "Rhino, 3D modelling, architectural diagrams",
         year: "School project",
-        heroImage: "",
-        heroLabel: "Add hero image: images/antara-ubud-water-house-hero.jpg",
-        description: "The Antara Ubud Water House is a two-storey bungalow concept on a hilled site in Ubud, Bali. The house responds to natural water pooling by turning water into a central source of pattern, flow, and spatial organisation, while balancing openness, privacy, and framed views across the landscape.",
-        brief: "Design a house that responds to a hilled landscape and uses water as both an environmental and experiential driver.",
-        process: "Programmes were positioned according to privacy, view, and terrain. The bedroom is placed underground for a more secluded atmosphere, while the living spaces use louvres to balance openness with privacy from higher parts of the hill.",
-        outcome: "The design creates a house where water guides the spatial experience and where private and open spaces are carefully layered through section, view, and material control.",
-        images: ["", ""]
+        heroImage: "img/antara.png",
+        heroLabel: "Hero image: img/antara.png",
+        hmw: "How might we design a relaxing getaway villa in Ubud that is shaped by water, privacy, and landscape flow, while turning the site's natural water levels into an immersive spatial experience?",
+        description: "The Antara Ubud Water House is a two-storey getaway villa concept on a hilled site in Ubud, Bali. The house responds to natural water pooling by turning water into a central source of movement, light, privacy, and atmosphere, creating a calm retreat where people can relax while staying connected to the landscape.",
+        brief: "Design a getaway villa that responds to a hilled landscape, natural water levels, privacy, and relaxation while using water as both an environmental and experiential driver.",
+        process: "Programmes were positioned according to privacy, view, water flow, and terrain. The design uses level changes to shape the journey through the villa, with stairs that descend beside the water level and lower spaces that feel more secluded and retreat-like.",
+        solution: "The final design is a two-storey villa with an upper level and a basement retreat. As users descend, the stairs run beside the water level, creating the feeling of moving down into water. In the basement, a clear ceiling allows sunlight to pass through the water above, casting a soft rippling water-light effect into the space below.",
+        outcome: "The design creates a quiet getaway villa where water guides the spatial experience. Privacy, landscape flow, and natural light are layered through section, allowing the basement to feel immersive and calming while the upper level remains open to views and movement.",
+        images: [
+          "img/antara-2.jpeg",
+          "https://youtu.be/SabVBXkKNMQ",
+          "img/antara-floorplan.png",
+          "img/antara-axo.png"
+        ],
+        reportFile: "docs/SDW-Ex4.pdf",
+        reportLabel: "Download full report"
       },
 
-      // =====================================================
-      // PROJECT: Bunny Island
-      // PAGE LINK: project.html?project=bunny-island
-      // HERO IMAGE: images/bunny-island-hero.jpg
-      // GALLERY IMAGE 1: images/bunny-island-01.jpg
-      // GALLERY IMAGE 2: images/bunny-island-02.jpg
-      // =====================================================
-      "bunny-island": {
-        title: "Bunny Island",
-        subtitle: "A playful 3D environment and world-building study",
-        category: "3D Environment / Game Design",
-        duration: "4 weeks",
-        role: "Environment designer, 3D modeller",
-        tools: "3D modelling, environment design, visual development",
+      "my-island": {
+        title: "My Island",
+        subtitle: "Whimsical interactive 3D island environment built in Unity",
+        category: "3D Environment / Interactive World-building",
+        duration: "4 weeks (School Project)",
+        role: "Environment designer, 3D modeller, Unity scene builder",
+        tools: "Unity, Maya, Photoshop, ZBrush, Unity nodes / Shader Graph",
         year: "School project",
-        heroImage: "",
-        heroLabel: "Add hero image: images/bunny-island-hero.jpg",
-        description: "Bunny Island is a 3D environment project exploring playful world-building, mood, scale, and environmental storytelling. The project focuses on designing a stylised space that feels coherent, charming, and explorable.",
-        brief: "Create a 3D environment with a clear theme, visual mood, and sense of place.",
-        process: "The environment was developed through spatial composition, prop placement, colour mood, and scale testing to make the world feel lively and readable.",
-        outcome: "The final environment creates a small narrative world with a strong visual identity and playful atmosphere.",
-        images: ["", ""]
+        heroImage: "img/my-island.jpeg",
+        heroLabel: "Hero image: img/my-island.jpeg",
+        framingEyebrow: "Project Focus",
+        framingTitle: "What This Project Does",
+        hmw: "My Island brings together a designed island silhouette, modular architecture, a hand-crafted hero tree, animated water, sound, ripples, waterfall movement, a skybox, and a realistic cloth-simulated bunny flag to create a cozy interactive 3D world.",
+        description: "My Island is a 4-week 3D environment project created in Unity, with Maya used for modelling and Photoshop used for the hero tree leaf artwork. The project explores how modular assets, animated environmental systems, sound, and playful visual details can make a small island feel whimsical, cozy, and alive.",
+        brief: "Create an interactive 3D island environment with a clear silhouette, stylised charm, modular assets, and atmospheric details that make the space feel alive.",
+        problem: "Building a rich island scene meant creating many houses and environmental details, but modelling every house individually would be time-consuming and difficult to keep consistent. The challenge was to make the world feel full and playful while keeping the production workflow manageable through modular design.",
+        approach: "I designed the island silhouette, then built the scene in Unity using Maya-modelled assets. A modular hut system was modelled and textured so the same house elements could be reused in different ways. The hero tree became the main landmark, with textured bark and leaves developed through Photoshop and ZBrush. I also used Unity nodes to animate the water, add interactive sound, ripples, and a waterfall, built a skybox for atmosphere, and created a realistic fabric bunny flag using Unity cloth simulation.",
+        outcome: "The final environment is a whimsical and cozy island with a cute bunny flag, a modular hut, animated water, a waterfall, and a shaded chill corner under the hero tree. The stump area creates a small resting spot where people can imagine sitting and relaxing, while the modular house system keeps the world expandable without needing to model every building from scratch.",
+        images: [
+          "img/my-island.jpeg",
+          "https://youtu.be/rxYPO3cCMlY"
+        ]
       },
 
-      // =====================================================
-      // PROJECT: Our Lion City VR
-      // PAGE LINK: project.html?project=our-lion-city-vr
-      // HERO IMAGE: images/our-lion-city-vr-hero.jpg
-      // GALLERY IMAGE 1: images/our-lion-city-vr-01.jpg
-      // GALLERY IMAGE 2: images/our-lion-city-vr-02.jpg
-      // =====================================================
       "our-lion-city-vr": {
         title: "Our Lion City VR",
-        subtitle: "Immersive VR experience about Singapore and spatial storytelling",
-        category: "VR / Interactive Media",
-        duration: "4 weeks",
-        role: "Interactive designer, VR experience designer",
-        tools: "VR development, Unity, 3D assets, interaction design",
+        subtitle: "Inclusive VR game set in old Singapore hawker culture",
+        category: "VR / Inclusive Game Design",
+        duration: "4 weeks (School Project)",
+        role: "VR experience designer, interaction designer, environment storyteller",
+        tools: "Unity, VR development, 3D assets, simple UI design, inclusive interaction design",
         year: "School project",
-        heroImage: "",
-        heroLabel: "Add hero image: images/our-lion-city-vr-hero.jpg",
-        description: "Our Lion City VR is a virtual reality project using immersive interaction to explore Singapore through spatial storytelling. The experience uses game-like interaction, environment design, and local visual cues to make place-based learning more engaging.",
-        brief: "Create an immersive experience that communicates place, memory, or culture through VR interaction.",
-        process: "The project involved designing user movement, interactive moments, visual scenes, and spatial pacing to make the VR environment understandable and engaging.",
-        outcome: "The final VR experience brings together local context, interactive media, and environmental storytelling in a compact virtual world.",
-        images: ["", ""]
+        heroImage: "img/ourlioncity.jpeg",
+        heroLabel: "Hero image: img/ourlioncity.jpeg",
+        hmw: "How might we design an inclusive VR game that supports people with little or no technology experience while emphasising Singaporean identity through old Singapore hawker culture?",
+        description: "Our Lion City VR is a virtual reality game about old Singapore and hawker culture. The story follows a present-day hawker whose stall was passed down from his grandfather. When his business struggles, he time travels back to the era of travelling rickshaw hawkers and must collect ingredients around old Singapore to return home.",
+        brief: "Create a VR experience that communicates Singaporean identity through old hawker culture while remaining accessible to players with little or no technology experience.",
+        problem: "VR can feel intimidating for players who are unfamiliar with computers, controllers, or game interfaces. The challenge was to make a heritage-based VR game that still felt inclusive, readable, and easy to enter for users with limited technology experience.",
+        approach: "We kept the UI simple, readable, and low-pressure, using clear prompts and familiar Singaporean cues to guide the player. The experience used hawker culture, ingredient collection, old streets, and the grandfather's rickshaw hawker past as environmental storytelling anchors, so players could understand the task without relying on complex controls.",
+        outcome: "The final VR game frames Singaporean identity through food heritage, family legacy, and old hawker culture. Players explore old Singapore, collect ingredients, and help the hawker return to his time, while the simplified interface makes the experience more welcoming for players with little technology experience.",
+        galleryTitle: "Final Presentation",
+        galleryDescription: "",
+        images: [
+          "docs/our-lion-city-slide-deck.pdf",
+          "https://youtu.be/W2IilvxVJPs"
+        ],
+        reportFile: "docs/our-lion-city-experiential-design-report.pdf",
+        reportLabel: "Download experiential design report"
       },
 
-      // =====================================================
-      // PROJECT: Sojourn
-      // PAGE LINK: project.html?project=sojourn
-      // HERO IMAGE: images/sojourn-hero.jpg
-      // GALLERY IMAGE 1: images/sojourn-01.jpg
-      // GALLERY IMAGE 2: images/sojourn-02.jpg
-      // =====================================================
       "sojourn": {
         title: "Sojourn",
-        subtitle: "Atmospheric horror game focused on pacing and player journey",
-        category: "Game / Storytelling",
-        duration: "4 weeks",
-        role: "Game designer, environment storyteller",
-        tools: "Game design, environment design, narrative pacing",
+        subtitle: "Interactive horror game set in a cursed Singapore neighbourhood",
+        category: "Game / Interactive Horror",
+        duration: "4 weeks (School Project)",
+        role: "Game designer, interactive developer, environment storyteller",
+        tools: "Unity, game design, interaction scripting, environment design, narrative pacing",
         year: "School project",
-        heroImage: "",
-        heroLabel: "Add hero image: images/sojourn-hero.jpg",
-        description: "Sojourn is a horror game-style project focused on atmosphere, pacing, environment, and player experience. The project studies how suspense can be built through spatial cues, visual mood, interaction, and carefully controlled reveals.",
-        brief: "Design a horror game experience that uses environment and pacing to guide emotional response.",
-        process: "The game direction was developed through moodboarding, spatial layout, player journey mapping, and atmosphere testing.",
-        outcome: "The final concept creates a tense experience where narrative and environment work together to shape the player's movement and anticipation.",
-        images: ["", ""]
+        heroImage: "img/sojourn.jpeg",
+        heroLabel: "Hero image: img/sojourn.jpeg",
+        hmw: "How might we develop an interactive horror game that uses Singaporean neighbourhood spaces, environmental pacing, and player action to build fear and curiosity?",
+        description: "Sojourn is a Singapore-based horror game set in a cursed neighbourhood. A new tenant becomes cursed after sleeping in his room one night, then follows a dead cat around the estate to collect amulets, burn them, and break the curse.",
+        brief: "Design a horror game experience that uses environment and pacing to guide emotional response while giving the player meaningful interactive tasks.",
+        problem: "The challenge was to make the horror feel local and interactive instead of relying only on jumpscares. The neighbourhood needed to feel familiar, unsettling, and readable enough for the player to follow clues while still feeling uncertain.",
+        approach: "The experience was developed around exploration, guided movement, and item collection. The dead cat acts as a strange guide through the neighbourhood, while amulets, spatial cues, sound, and pacing push the player forward. Interaction was used to make the player actively participate in breaking the curse rather than only watching the story unfold.",
+        outcome: "The final game concept creates an interactive horror journey through a cursed Singapore neighbourhood. By following the dead cat, collecting amulets, and burning them to break the curse, the player experiences fear through movement, discovery, and environmental tension.",
+        galleryTitle: "Final Presentation",
+        galleryDescription: "",
+        images: [
+          "docs/sojourn_Presentation.pdf",
+          "https://youtu.be/tXcJLoGyMgQ"
+        ],
+        reportFile: "docs/sojourn-report.pdf",
+        reportLabel: "Download report"
       },
 
-      // =====================================================
-      // PROJECT: Supper Nostalgia
-      // PAGE LINK: project.html?project=supper-nostalgia
-      // HERO IMAGE: images/supper-nostalgia-hero.jpg
-      // GALLERY IMAGE 1: images/supper-nostalgia-01.jpg
-      // GALLERY IMAGE 2: images/supper-nostalgia-02.jpg
-      // =====================================================
       "supper-nostalgia": {
         title: "Supper Nostalgia",
-        subtitle: "Doodle People x NP postcard about food memories and local nostalgia",
-        category: "Visual Storytelling / Illustration",
-        duration: "3 weeks",
-        role: "Visual designer, storyteller",
-        tools: "Illustration, layout design, visual storytelling",
+        subtitle: "Interactive AR postcard about Singapore supper culture",
+        category: "AR / Interactive Postcard",
+        duration: "3 weeks (School Project)",
+        role: "Visual designer, AR storyteller, illustrator",
+        tools: "Illustration, AR interaction, layout design, visual storytelling",
         year: "School project",
-        heroImage: "",
-        heroLabel: "Add hero image: images/supper-nostalgia-hero.jpg",
-        description: "Supper Nostalgia is a Doodle People x NP school project postcard that explores local food memories and the familiar comfort of supper culture. The project translates nostalgia into a compact visual format through illustration, composition, and storytelling.",
-        brief: "Create a postcard that communicates a clear local memory or emotional theme.",
-        process: "The visual direction focused on recognisable local references, warmth, and a playful illustrated language that could quickly communicate memory and atmosphere.",
-        outcome: "The final postcard captures the mood of shared supper moments through a nostalgic and accessible visual style.",
+        heroImage: "img/super-nostalgia.jpeg",
+        heroLabel: "Hero image: img/super-nostalgia.jpeg",
+        hmw: "How might we encapsulate Singapore's supper culture to invoke nostalgia through an interactive AR postcard?",
+        description: "Supper Nostalgia is a Doodle People x NP interactive postcard project about local food memories. The postcard can be scanned with AR to produce an interactive experience themed around nostalgia, focusing on late-night supper culture in Singapore and eating at a prata shop with friends.",
+        brief: "Create an interactive postcard that uses AR to bring a nostalgic local memory to life.",
+        problem: "Nostalgia can be difficult to communicate in a small postcard format, especially when the final experience also needs to work interactively through AR. The challenge was to make a familiar supper memory feel warm, local, and engaging at first glance and after scanning.",
+        approach: "We focused on the shared ritual of eating prata late at night with friends. The visual direction used familiar supper culture cues, warm food memories, and local social atmosphere, then extended the static postcard into an AR interaction so the memory could feel more alive.",
+        outcome: "The final postcard captures the comfort of Singapore supper culture through a nostalgic prata-shop scene. The AR layer turns the postcard from a flat illustration into a small interactive memory of late-night food, friends, and local routine.",
         images: ["", ""]
       },
 
-      // =====================================================
-      // PROJECT: DQueue
-      // PAGE LINK: project.html?project=dqueue
-      // HERO IMAGE: images/dqueue-hero.jpg
-      // GALLERY IMAGE 1: images/dqueue-01.jpg
-      // GALLERY IMAGE 2: images/dqueue-02.jpg
-      // =====================================================
       "dqueue": {
         title: "DQueue",
-        subtitle: "Mobile and watch UX proposal for clearer queue experiences",
+        subtitle: "Pandemic-era queue management app for F&B restrictions",
         category: "UX / App Design",
-        duration: "UX / app concept",
-        role: "UX designer, interface designer, researcher",
-        tools: "UX research, wireframing, mobile UI, wearable UI",
+        duration: "2-week project",
+        role: "UX designer, UI designer, researcher",
+        tools: "UX research, wireframing, mobile UI, wearable UI, service flow design",
         year: "School project",
-        heroImage: "",
-        heroLabel: "Add hero image: images/dqueue-hero.jpg",
-        description: "DQueue is a UX proposal for a mobile and watch app designed to improve queuing experiences through clearer digital touchpoints. The project focuses on reducing uncertainty, helping users track queue progress, and connecting mobile and wearable interactions into one simple system.",
-        brief: "Design a digital queue experience that makes waiting clearer, less stressful, and easier to manage.",
-        process: "The UX direction considered queue pain points, notification timing, glanceable information, and how a watch interface could support quick updates without overwhelming the user.",
-        outcome: "The proposal combines mobile and wearable flows to make queuing feel more transparent and manageable.",
+        heroImage: "img/DQueue.png",
+        heroLabel: "Hero image: img/DQueue.png",
+        hmw: "How might we help F&B owners and customers manage queues, crowd limits, and dining restrictions more clearly during the pandemic new norm?",
+        description: "DQueue was designed during the peak of the pandemic, when people were adjusting to the new norm and dining restrictions still limited groups to two people per party. The app supports both customers and F&B owners by making queue progress, crowd management, and dining flow easier to understand.",
+        brief: "Design a digital queue system that helps customers and F&B businesses manage waiting, restrictions, and crowd control more smoothly.",
+        problem: "F&B businesses were struggling to bring in customers while also following crowd restrictions. Customers also faced uncertainty around queue length, waiting time, and whether a venue could safely accommodate them under changing rules.",
+        approach: "The app was designed with a clean and simple UI so that customers could understand queue status quickly, while F&B owners could better manage crowds and table flow. The UX focused on clarity, low friction, and making queue information easy to check across mobile and wearable touchpoints.",
+        outcome: "The final concept helps reduce queue uncertainty for customers and gives F&B owners a clearer way to manage crowds during restriction-heavy periods. It supports safer, more organised dining while keeping the experience easy to use.",
         images: ["", ""]
       },
 
-      // =====================================================
-      // PROJECT: Fashion Microfibre Website
-      // PAGE LINK: project.html?project=fashion-microfibre-website
-      // HERO IMAGE: images/fashion-microfibre-hero.jpg
-      // GALLERY IMAGE 1: images/fashion-microfibre-01.jpg
-      // GALLERY IMAGE 2: images/fashion-microfibre-02.jpg
-      // =====================================================
-      "fashion-microfibre-website": {
-        title: "Fashion Microfibre Website",
-        subtitle: "Sustainability website analysing swimwear fabric microfibre impact",
-        category: "Web / Research",
-        duration: "2 weeks",
-        role: "Web designer, research communicator",
-        tools: "Web design, research synthesis, visual communication",
+      "seachange-studios": {
+        title: "Seachange Studios",
+        subtitle: "Sustainable swimwear platform for microfibre-aware material choices",
+        category: "AI / Sustainable Web Platform",
+        duration: "2 weeks (School Project)",
+        role: "Web designer, AI concept designer, research communicator",
+        tools: "Web design, AI-assisted recommendation concept, materials research, visual communication",
         year: "School project",
-        heroImage: "",
-        heroLabel: "Add hero image: images/fashion-microfibre-hero.jpg",
-        description: "Fashion Microfibre Website is a short web project analysing the microfibre impact of swimwear fabric. It connects fashion, material research, and sustainability through an accessible website format that helps users understand environmental consequences through clear digital communication.",
-        brief: "Create a website that explains a material sustainability issue in a way that is understandable and visually engaging.",
-        process: "The project involved translating research into web sections, choosing a clear information hierarchy, and designing visual moments that support learning.",
-        outcome: "The final website communicates the issue of microfibre pollution through a focused, research-led digital experience.",
-        images: ["", ""]
+        heroImage: "img/fashion-website.jpeg",
+        heroLabel: "Hero image: img/fashion-website.jpeg",
+        hmw: "How might we increase awareness of microfibre shedding from both production and consumer choices while helping people choose lower-impact swimwear materials?",
+        description: "Seachange Studios is an AI-assisted concept platform that helps swimwear brands and consumers make more sustainable material decisions. Users can upload swimwear images when considering a purchase, while industry users can explore fabric construction recommendations for producing lower-impact swimwear.",
+        brief: "Design an interactive platform that communicates microfibre shedding and helps users understand material trade-offs in swimwear production and purchasing.",
+        problem: "Microfibre shedding is often invisible to consumers and difficult for brands to communicate clearly. Both production teams and shoppers may lack accessible tools for comparing material choices, microplastic impact, and environmental trade-offs.",
+        approach: "The platform was designed around an interactive materials selection tool. It uses an AI-assisted concept flow to recommend fabric constructions, surface lower-impact alternatives, and explain trade-offs between performance, sustainability, and microplastic shedding. The upload feature supports both shoppers evaluating swimwear and industry users planning production.",
+        outcome: "The final concept turns microfibre research into a clearer web experience. Seachange Studios helps brands choose lower-impact material constructions and helps consumers become more aware of the hidden environmental cost behind swimwear fabric choices.",
+        images: [
+          "https://youtu.be/KXIEuEqIVwk"
+        ]
       },
 
-      // =====================================================
-      // PROJECT: Innowave Technology Website Revamp
-      // PAGE LINK: project.html?project=innowave-technology-website-revamp
-      // HERO IMAGE: images/innowave-website-revamp-hero.jpg
-      // GALLERY IMAGE 1: images/innowave-website-revamp-01.jpg
-      // GALLERY IMAGE 2: images/innowave-website-revamp-02.jpg
-      // =====================================================
       "innowave-technology-website-revamp": {
         title: "Innowave Technology Website Revamp",
         subtitle: "Website analysis, restructuring, and redesign support",
@@ -733,8 +854,8 @@
         role: "Digital marketing intern, website design support",
         tools: "Website analysis, content restructuring, marketing consultation",
         year: "2025",
-        heroImage: "",
-        heroLabel: "Add hero image: images/innowave-website-revamp-hero.jpg",
+        heroImage: "img/innowave.png",
+        heroLabel: "Hero image: img/innowave.png",
         description: "The Innowave Technology Website Revamp involved assessing and restructuring the company's website through analysis, content organisation, and consultation with marketing agencies. The work focused on making the website clearer, more current, and better aligned with the company's digital presence.",
         brief: "Support the improvement of an existing technology company website through clearer structure, content flow, and visual direction.",
         process: "The work involved reviewing existing pages, identifying areas for restructuring, organising content, and supporting website refurbishment discussions with marketing partners.",
@@ -742,13 +863,6 @@
         images: ["", ""]
       },
 
-      // =====================================================
-      // PROJECT: Procon Events & Marketing
-      // PAGE LINK: project.html?project=procon-events-and-marketing
-      // HERO IMAGE: images/procon-events-hero.jpg
-      // GALLERY IMAGE 1: images/procon-events-01.jpg
-      // GALLERY IMAGE 2: images/procon-events-02.jpg
-      // =====================================================
       "procon-events-and-marketing": {
         title: "Procon Events & Marketing",
         subtitle: "Junior designer work for high-profile brand activations",
@@ -757,8 +871,8 @@
         role: "Junior designer, production support, on-site event support",
         tools: "Event design, production coordination, client-facing design support",
         year: "2023 — 2024",
-        heroImage: "",
-        heroLabel: "Add hero image: images/procon-events-hero.jpg",
+        heroImage: "img/procon.png",
+        heroLabel: "Hero image: img/procon.png",
         description: "At Procon Events & Marketing, I supported event design and production for high-profile brand activations, including House of Sephora, TAG Heuer F1 ION, Audemars Piguet client events, and Penfolds. The work involved design deliverables, production coordination, and on-site support under real client and vendor timelines.",
         brief: "Support event design and production work across luxury, beauty, and lifestyle brand activations.",
         process: "The internship involved preparing design deliverables, coordinating production needs, responding to client requirements, and supporting on-site execution for selected events.",
@@ -787,8 +901,139 @@
       element.classList.add("has-image");
     }
 
+    function getYouTubeId(url) {
+      const value = String(url);
+
+      const shortMatch = value.match(/youtu\.be\/([^?&]+)/);
+      if (shortMatch) return shortMatch[1];
+
+      const longMatch = value.match(/[?&]v=([^?&]+)/);
+      if (longMatch) return longMatch[1];
+
+      return "";
+    }
+
+    function setGalleryMedia(element, mediaPath) {
+      if (!element || !mediaPath) {
+        if (element) element.remove();
+        return;
+      }
+
+      const value = String(mediaPath);
+      const lowerValue = value.toLowerCase();
+      const isYouTube = lowerValue.includes("youtu.be") || lowerValue.includes("youtube.com");
+      const isMp4 = lowerValue.endsWith(".mp4");
+      const isPdf = lowerValue.endsWith(".pdf");
+      const shouldContain = lowerValue.includes("floorplan") || lowerValue.includes("axo") || lowerValue.includes("diagram") || lowerValue.includes("plan");
+
+      if (isPdf) {
+        element.classList.add("pdf-preview");
+        element.innerHTML = `
+          <iframe
+            src="${escapeHTML(value)}"
+            title="PDF slide deck preview"
+            loading="lazy">
+          </iframe>
+
+          <div class="pdf-preview-bar">
+            <span class="pdf-preview-title">PDF deck preview</span>
+
+            <div class="pdf-preview-actions">
+              <a class="btn" href="${escapeHTML(value)}" target="_blank" rel="noopener">
+                Open PDF
+              </a>
+            </div>
+          </div>
+        `;
+
+        return;
+      }
+
+      if (isYouTube) {
+        const videoId = getYouTubeId(value);
+        const thumbnail = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : "";
+
+        if (thumbnail) {
+          element.style.backgroundImage = `url('${thumbnail}')`;
+          element.classList.add("has-image", "video-slot");
+        }
+
+        element.innerHTML = `
+          <a class="video-link" href="${escapeHTML(value)}" target="_blank" rel="noopener" aria-label="Open project video">
+            <span class="video-play">▶</span>
+            <span class="video-label">Watch project video</span>
+          </a>
+        `;
+
+        return;
+      }
+
+      if (isMp4) {
+        element.classList.add("has-video");
+        element.innerHTML = `
+          <video controls muted playsinline preload="metadata">
+            <source src="${escapeHTML(value)}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        `;
+
+        return;
+      }
+
+      const testImage = new Image();
+
+      testImage.onload = () => {
+        element.style.backgroundImage = `url('${value}')`;
+        element.classList.add("has-image");
+
+        if (shouldContain) {
+          element.classList.add("contain-image");
+        }
+      };
+
+      testImage.onerror = () => {
+        element.remove();
+      };
+
+      testImage.src = value;
+    }
+
+    function inferHMW(project) {
+      if (project.hmw || project.howMightWe) return project.hmw || project.howMightWe;
+
+      const title = project.title || "this project";
+      const category = String(project.category || "").toLowerCase();
+
+      if (category.includes("ux") || category.includes("app")) {
+        return `How might we make ${title} easier, clearer, and more useful for its target users?`;
+      }
+
+      if (category.includes("web")) {
+        return `How might we communicate ${title} in a clearer and more engaging digital experience?`;
+      }
+
+      if (category.includes("game") || category.includes("vr") || category.includes("interactive")) {
+        return `How might we use interaction, pacing, and environment design to make ${title} more immersive?`;
+      }
+
+      if (category.includes("product")) {
+        return `How might we design ${title} as a practical, user-centred system that responds to real constraints?`;
+      }
+
+      return `How might we frame ${title} as a clear design response to a real user, context, or storytelling need?`;
+    }
+
     function renderProject(project, slug) {
       document.title = `${project.title} — Vadora Tang`;
+
+      const hmwValue = inferHMW(project);
+      const framingEyebrow = project.framingEyebrow || "Design Framing";
+      const framingTitle = project.framingTitle || "How Might We";
+      const challengeValue = project.problem || project.challenge || project.brief || "Add the main problem, user need, or design opportunity here.";
+      const approachValue = project.approach || project.process || "Add your research, ideation, testing, and iteration process here.";
+      const outcomeValue = project.solution || project.outcome || "Add the final design outcome and what it improved here.";
+      const galleryTitle = project.galleryTitle || "Process + final documentation";
+      const galleryDescription = project.galleryDescription || "";
 
       return `
         <section class="project-hero">
@@ -837,30 +1082,39 @@
                 <div class="detail-label">Tools</div>
                 <div class="detail-value">${escapeHTML(project.tools)}</div>
               </div>
-              <div class="detail-row">
-                <div class="detail-label">Year</div>
-                <div class="detail-value">${escapeHTML(project.year)}</div>
-              </div>
+              ${project.reportFile ? `
+                <div class="project-actions">
+                  <a class="btn report-btn" href="${escapeHTML(project.reportFile)}" download>
+                    ↓ ${escapeHTML(project.reportLabel || "Download report")}
+                  </a>
+                </div>
+              ` : ""}
             </aside>
           </div>
         </section>
 
         <section class="content-section">
           <div class="section-wrap">
+            <article class="hmw-card">
+              <span class="hmw-eyebrow">${escapeHTML(framingEyebrow)}</span>
+              <h2>${escapeHTML(framingTitle)}</h2>
+              <p>${escapeHTML(hmwValue)}</p>
+            </article>
+
             <div class="content-grid">
               <article class="text-card">
-                <h3>Brief</h3>
-                <p>${escapeHTML(project.brief)}</p>
+                <h3>Challenge</h3>
+                <p>${escapeHTML(challengeValue)}</p>
               </article>
 
               <article class="text-card">
-                <h3>Process</h3>
-                <p>${escapeHTML(project.process)}</p>
+                <h3>Approach</h3>
+                <p>${escapeHTML(approachValue)}</p>
               </article>
 
               <article class="text-card">
                 <h3>Outcome</h3>
-                <p>${escapeHTML(project.outcome)}</p>
+                <p>${escapeHTML(outcomeValue)}</p>
               </article>
             </div>
 
@@ -872,21 +1126,19 @@
                 <span class="window-title">project images</span>
               </div>
               <div class="wide-card-body">
-                <h2>Visual documentation</h2>
-                <p>Add process shots, final renders, sketches, interface screens, event photos, or diagrams here.</p>
+                <h2>${escapeHTML(galleryTitle)}</h2>
+                ${galleryDescription ? `<p>${escapeHTML(galleryDescription)}</p>` : ""}
 
                 <div class="image-grid">
-                  <div class="image-slot" id="galleryImageOne">Image slot 01</div>
-                  <div class="image-slot" id="galleryImageTwo">Image slot 02</div>
+                  ${(project.images || [])
+                    .filter(Boolean)
+                    .map((_, index) => `
+                      <div class="image-slot" id="galleryImage${index}">Image slot ${String(index + 1).padStart(2, "0")}</div>
+                    `)
+                    .join("")}
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        <section class="next-section">
-          <div class="section-wrap">
-            <a href="index.html#projects" class="btn primary">← Back to Projects</a>
           </div>
         </section>
       `;
@@ -898,7 +1150,6 @@
           <div class="section-wrap">
             <h1>Project not found</h1>
             <p>No project page exists for <strong>${escapeHTML(slug)}</strong> yet. Check the slug in PROJECTS inside project.html.</p>
-            <a href="index.html#projects" class="btn primary">← Back to Projects</a>
           </div>
         </section>
       `;
@@ -913,9 +1164,21 @@
     } else {
       app.innerHTML = renderProject(project, slug);
       setBackgroundImage(document.getElementById("heroImage"), project.heroImage);
-      setBackgroundImage(document.getElementById("galleryImageOne"), project.images && project.images[0]);
-      setBackgroundImage(document.getElementById("galleryImageTwo"), project.images && project.images[1]);
+      (project.images || []).forEach((mediaPath, index) => {
+        setGalleryMedia(document.getElementById(`galleryImage${index}`), mediaPath);
+      });
     }
+
+    const dockNav = document.querySelector(".dock-nav");
+    let dockTimer;
+
+    window.addEventListener("scroll", () => {
+      if (!dockNav) return;
+
+      dockNav.classList.add("is-scrolling");
+      clearTimeout(dockTimer);
+      dockTimer = setTimeout(() => dockNav.classList.remove("is-scrolling"), 180);
+    }, { passive: true });
   </script>
 </body>
 </html>
