@@ -313,36 +313,60 @@ window.PROJECTS = [
     reportLabel: "Download readme report"
   },
 
-  {
-    slug: "dqueue",
-    title: "DQueue",
+    {
+    slug: "strive-study-app",
+    title: "Strive",
     featured: true,
     visible: true,
+
     categoryGroup: "uxweb",
-    categoryLabel: "UX / App Design",
-    subtitle: "Pandemic-era queue management app for F&B restrictions",
-    cardDescription: "A pandemic-era mobile and watch app concept helping F&B owners and customers manage crowd limits, queues, and dining restrictions.",
-    detailDescription: "DQueue was designed during the peak of the pandemic, when people were adjusting to the new norm and dining restrictions still limited groups to two people per party. The app supports both customers and F&B owners by making queue progress, crowd management, and dining flow easier to understand.",
-    meta: "2-week UX project",
-    duration: "2-week project",
-    role: "UX designer, UI designer, researcher",
-    tools: "UX research, wireframing, mobile UI, wearable UI, service flow design",
-    year: "School project",
-    heroImage: "img/DQueue.png",
-    fallback: "linear-gradient(135deg,#FFE6C7,#F5BF73)",
-    hmw: "How might we help F&B owners and customers manage queues, crowd limits, and dining restrictions more clearly during the pandemic new norm?",
-    problem: "F&B businesses were struggling to bring in customers while also following crowd restrictions. Customers also faced uncertainty around queue length, waiting time, and whether a venue could safely accommodate them under changing rules.",
-    approach: "The app was designed with a clean and simple UI so that customers could understand queue status quickly, while F&B owners could better manage crowds and table flow. The UX focused on clarity, low friction, and making queue information easy to check across mobile and wearable touchpoints.",
-    outcome: "The final concept helps reduce queue uncertainty for customers and gives F&B owners a clearer way to manage crowds during restriction-heavy periods. It supports safer, more organised dining while keeping the experience easy to use.",
+    categoryLabel: "UX + Web",
+
+    subtitle: "An interactive gamified study buddy that helps students learn with AI without becoming overly dependent on it.",
+    cardDescription: "A gamified AI study app that encourages active recall, quizzes, and independent thinking instead of passive AI dependency.",
+    meta: "Hackathon project",
+
+    duration: "Hackathon project",
+    role: "UX/UI designer, product strategist, prototype designer",
+    tools: "Figma, AI tools, UX research, prototyping",
+    year: "2025",
+
+    heroImage: "img/Strive.png",
+    fallback: "linear-gradient(135deg,#D8C7FF,#F7C8DD)",
+
+    detailDescription:
+      "Strive is an interactive gamified study app designed to help students study more effectively with AI while still encouraging independent thinking, active recall, and long-term retention.",
+
+    hmw:
+      "How might we use AI to improve students' productivity and learning quality without developing an over-reliance on AI or weakening critical thinking?",
+
+    problem:
+      "Students are increasingly using AI to study, but many end up reading direct answers instead of actively understanding concepts. This can lead to AI dependency, passive learning, weaker critical thinking, and poor knowledge retention.",
+
+    approach:
+      "The project uses a Focus-Retention-Mastery framework. Strive combines an AI tutor, daily quiz generation, anti-spoonfeeding restrictions, gamified rewards, avatar unlocks, and progress-based motivation to make studying more active and engaging.",
+
+    outcome:
+      "The final concept is a mobile study companion that supports concept breakdowns, practice quizzes, reward systems, and avatar customisation. It encourages students to test their understanding instead of relying only on AI-generated answers.",
+
+    galleryTitle: "Prototype + presentation",
+    galleryDescription: "",
+
+    reportFile: "docs/strive-presentation.pdf",
+    reportLabel: "Download Strive presentation",
+
     media: [
       {
-        src: "docs/DQueue Proposal.pdf",
+        type: "youtube",
+        src: "https://youtu.be/KD67CYJD2SU",
+        label: "Strive app demo video"
+      },
+      {
         type: "pdf",
-        label: "Proposal"
+        src: "docs/strive-presentation.pdf",
+        label: "Strive presentation deck"
       }
-    ],
-    reportFile: "",
-    reportLabel: ""
+    ]
   },
 
   {
@@ -371,6 +395,38 @@ window.PROJECTS = [
         src: "https://youtu.be/KXIEuEqIVwk",
         type: "youtube",
         label: "Demo video"
+      }
+    ],
+    reportFile: "",
+    reportLabel: ""
+  },
+
+  {
+    slug: "dqueue",
+    title: "DQueue",
+    featured: true,
+    visible: true,
+    categoryGroup: "uxweb",
+    categoryLabel: "UX / App Design",
+    subtitle: "Pandemic-era queue management app for F&B restrictions",
+    cardDescription: "A pandemic-era mobile and watch app concept helping F&B owners and customers manage crowd limits, queues, and dining restrictions.",
+    detailDescription: "DQueue was designed during the peak of the pandemic, when people were adjusting to the new norm and dining restrictions still limited groups to two people per party. The app supports both customers and F&B owners by making queue progress, crowd management, and dining flow easier to understand.",
+    meta: "2-week UX project",
+    duration: "2-week project",
+    role: "UX designer, UI designer, researcher",
+    tools: "UX research, wireframing, mobile UI, wearable UI, service flow design",
+    year: "School project",
+    heroImage: "img/DQueue.png",
+    fallback: "linear-gradient(135deg,#FFE6C7,#F5BF73)",
+    hmw: "How might we help F&B owners and customers manage queues, crowd limits, and dining restrictions more clearly during the pandemic new norm?",
+    problem: "F&B businesses were struggling to bring in customers while also following crowd restrictions. Customers also faced uncertainty around queue length, waiting time, and whether a venue could safely accommodate them under changing rules.",
+    approach: "The app was designed with a clean and simple UI so that customers could understand queue status quickly, while F&B owners could better manage crowds and table flow. The UX focused on clarity, low friction, and making queue information easy to check across mobile and wearable touchpoints.",
+    outcome: "The final concept helps reduce queue uncertainty for customers and gives F&B owners a clearer way to manage crowds during restriction-heavy periods. It supports safer, more organised dining while keeping the experience easy to use.",
+    media: [
+      {
+        src: "docs/DQueue Proposal.pdf",
+        type: "pdf",
+        label: "Proposal"
       }
     ],
     reportFile: "",
@@ -452,5 +508,6 @@ window.PROJECTS = [
     ],
     reportFile: "",
     reportLabel: ""
-  }
+  },
+
 ];
