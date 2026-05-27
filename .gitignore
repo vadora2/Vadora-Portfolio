@@ -1,1 +1,5 @@
 vadora-portfolio/img/*.mp4
+vadora-portfolio/img/*.mp4
+.DS_Store
+vadora-portfolio/.DS_Store
+vadora-portfolio/img/.DS_Store
