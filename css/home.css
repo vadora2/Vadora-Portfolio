@@ -333,6 +333,27 @@ nav.dock-nav {
   color: white;
 }
 
+.project-category-featured {
+  margin-bottom: 0;
+}
+
+.featured-project-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.featured-project-actions .btn {
+  box-shadow: var(--shadow);
+}
+
+.empty-projects {
+  color: #666;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
 /* ABOUT */
 #about {
   background:

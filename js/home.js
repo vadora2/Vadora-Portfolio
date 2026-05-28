@@ -6,7 +6,7 @@ function renderProjectCard(project) {
     ? `<img src="${Utils.escapeHTML(project.heroImage)}" alt="${Utils.escapeHTML(project.title)} project preview" loading="lazy" onerror="this.remove(); this.parentElement.classList.remove('has-image');" />`
     : "";
 
-  const cardLink = Utils.getProjectUrl(project);
+  const cardLink = `project.html?project=${encodeURIComponent(project.slug)}`;
 
   return `
     <article class="project-card" data-slug="${Utils.escapeHTML(project.slug)}" data-visible="${project.visible}">
@@ -24,40 +24,42 @@ function renderProjectCard(project) {
   `;
 }
 
-function getProjectsForCategory(category) {
-  const projects = Utils.getProjects().filter(project => project.visible);
+function getHomepageProjects() {
+  return Utils.getProjects().filter(project => project.visible === true && project.featured === true);
+}
 
-  if (category.id === "selected") {
-    return projects.filter(project => project.featured);
-  }
-
-  return projects.filter(project => project.categoryGroup === category.id);
+function getSelectedCategoryCopy() {
+  return Utils.getCategories().find(category => category.id === "selected") || {
+    title: "Selected Work",
+    note: "curated highlights from the full archive"
+  };
 }
 
 function renderProjects() {
   const container = document.getElementById("projectCategories");
   if (!container) return;
 
-  container.innerHTML = Utils.getCategories()
-    .filter(category => category.visible)
-    .map(category => {
-      const cards = getProjectsForCategory(category);
+  const cards = getHomepageProjects();
+  const selectedCategory = getSelectedCategoryCopy();
 
-      if (cards.length === 0) return "";
+  if (cards.length === 0) {
+    container.innerHTML = `
+      <p class="empty-projects">No featured projects are visible yet.</p>
+    `;
+    return;
+  }
 
-      return `
-        <div class="project-category">
-          <div class="category-title-row">
-            <h3 class="category-title">${Utils.escapeHTML(category.title)}</h3>
-            <p class="category-note">${Utils.escapeHTML(category.note)}</p>
-          </div>
-          <div class="cards-grid">
-            ${cards.map(renderProjectCard).join("")}
-          </div>
-        </div>
-      `;
-    })
-    .join("");
+  container.innerHTML = `
+    <div class="project-category project-category-featured">
+      <div class="category-title-row">
+        <h3 class="category-title">${Utils.escapeHTML(selectedCategory.title)}</h3>
+        <p class="category-note">${Utils.escapeHTML(selectedCategory.note)}</p>
+      </div>
+      <div class="cards-grid">
+        ${cards.map(renderProjectCard).join("")}
+      </div>
+    </div>
+  `;
 }
 
 function setHeroImage() {

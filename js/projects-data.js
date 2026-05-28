@@ -6,6 +6,13 @@ window.PROJECT_CATEGORIES = [
   {
     id: "selected",
     visible: false,
+    title: "Some of my work!",
+    note: "curated highlights from the full archive"
+  },
+
+  {
+    id: "selected",
+    visible: false,
     title: "Selected Work",
     note: "best first impression"
   },
@@ -113,7 +120,7 @@ window.PROJECTS = [
   {
     slug: "the-antara-ubud-water-house",
     title: "The Antara Ubud Water House",
-    featured: true,
+    featured: false,
     visible: true,
     categoryGroup: "spatial",
     categoryLabel: "Architecture / 3D Spatial Design",
@@ -199,7 +206,7 @@ window.PROJECTS = [
   {
     slug: "our-lion-city-vr",
     title: "Our Lion City VR",
-    featured: true,
+    featured: false,
     visible: true,
     categoryGroup: "interactive",
     categoryLabel: "VR / Inclusive Game Design",
@@ -238,7 +245,7 @@ window.PROJECTS = [
   {
     slug: "sojourn",
     title: "Sojourn",
-    featured: true,
+    featured: false,
     visible: true,
     categoryGroup: "interactive",
     categoryLabel: "Game / Interactive Horror",
@@ -404,7 +411,7 @@ window.PROJECTS = [
   {
     slug: "dqueue",
     title: "DQueue",
-    featured: true,
+    featured: false,
     visible: true,
     categoryGroup: "uxweb",
     categoryLabel: "UX / App Design",
@@ -436,10 +443,10 @@ window.PROJECTS = [
   {
     slug: "innowave-technology-website-revamp",
     title: "Innowave Technology Website Revamp",
-    featured: false,
+    featured: true,
     visible: true,
     categoryGroup: "uxweb",
-    categoryLabel: "Web / Professional",
+    categoryLabel: "Internship - Digital Marketing",
     subtitle: "Website analysis, restructuring, and redesign support",
     cardDescription: "Website analysis, restructuring, and redesign support through marketing consultation and content organisation.",
     detailDescription: "The Innowave Technology Website Revamp involved assessing and restructuring the company's website through analysis, content organisation, and consultation with marketing agencies. The work focused on making the website clearer, more current, and better aligned with the company's digital presence.",
@@ -478,7 +485,7 @@ window.PROJECTS = [
     featured: true,
     visible: true,
     categoryGroup: "graphic-events",
-    categoryLabel: "Professional / Events Design",
+    categoryLabel: "Internship - Junior Designer",
     subtitle: "Junior designer work for high-profile brand activations",
     cardDescription: "Graphic design and production support for branded events, including House of Sephora, TAG Heuer F1 ION, Audemars Piguet, and Penfolds.",
     detailDescription: "At Procon Events & Marketing, I supported event design and production for high-profile brand activations, including House of Sephora, TAG Heuer F1 ION, Audemars Piguet client events, and Penfolds. The work involved design deliverables, production coordination, and on-site support under real client and vendor timelines.",
