@@ -52,8 +52,10 @@ function renderProjects() {
   container.innerHTML = `
     <div class="project-category project-category-featured">
       <div class="category-title-row">
-        <h3 class="category-title">${Utils.escapeHTML(selectedCategory.title)}</h3>
-        <p class="category-note">${Utils.escapeHTML(selectedCategory.note)}</p>
+        <div>
+          <h3 class="category-title">${Utils.escapeHTML(selectedCategory.title)}</h3>
+        </div>
+        <a href="projects-home.html" class="archive-cta">View All Projects →</a>
       </div>
       <div class="cards-grid">
         ${cards.map(renderProjectCard).join("")}
@@ -164,14 +166,21 @@ function initScrollEffects() {
 }
 
 function initAboutInteractions() {
-  const aboutPlaygroundText = document.getElementById("aboutPlaygroundText");
-  const aboutProfileChips = document.querySelectorAll(".profile-chip[data-copy]");
+  const journeyItems = document.querySelectorAll(".journey-item");
 
-  aboutProfileChips.forEach(chip => {
-    chip.addEventListener("click", () => {
-      aboutProfileChips.forEach(item => item.classList.remove("is-active"));
-      chip.classList.add("is-active");
-      if (aboutPlaygroundText) aboutPlaygroundText.textContent = chip.dataset.copy;
+  journeyItems.forEach(item => {
+    item.addEventListener("click", () => {
+      const isActive = item.classList.contains("is-active");
+
+      journeyItems.forEach(journeyItem => {
+        journeyItem.classList.remove("is-active");
+        journeyItem.setAttribute("aria-expanded", "false");
+      });
+
+      if (!isActive) {
+        item.classList.add("is-active");
+        item.setAttribute("aria-expanded", "true");
+      }
     });
   });
 }

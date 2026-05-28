@@ -84,25 +84,22 @@ function setGalleryMedia(element, mediaItem) {
 
   if (type === "youtube") {
     const videoId = Utils.getYouTubeId(src);
-    const thumbnail = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : "";
 
-    if (thumbnail) {
-      element.style.backgroundImage = `url('${thumbnail}')`;
-      element.classList.add("has-image", "video-slot");
+    if (!videoId) {
+      element.remove();
+      return;
     }
 
+    element.classList.add("has-video", "youtube-embed");
     element.innerHTML = `
-      <a 
-        class="video-link" 
-        href="${Utils.escapeHTML(src)}" 
-        target="_blank" 
-        rel="noopener" 
-        aria-label="Open project video">
-        <span class="video-play">▶</span>
-        <span class="video-label">
-          ${Utils.escapeHTML(label || "Watch project video")}
-        </span>
-      </a>
+      <iframe
+        src="https://www.youtube.com/embed/${Utils.escapeHTML(videoId)}"
+        title="${Utils.escapeHTML(label || "Project video")}"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
     `;
 
     return;
@@ -306,7 +303,7 @@ function renderNotFound(slug) {
           <strong>${Utils.escapeHTML(slug)}</strong> yet. 
           Check the slug in <strong>js/projects-data.js</strong>.
         </p>
-        <a class="btn primary" href="index.html#projects">Back to Projects</a>
+        <a class="btn primary" href="projects-home.html">Back to Projects</a>
       </div>
     </section>
   `;
